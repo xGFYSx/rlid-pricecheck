@@ -10,9 +10,28 @@ if( $method == 'POST' ){
 
 	$text = $json->result->parameters->text;
 
+	switch($text) {
+		case 'hi':
+			$speech = 'Helloo...';
+			break;
+
+		case 'bye':
+			$speech = 'Gnight';
+			break;
+
+		case 'anything':
+			$speech = 'What should i do master?';
+			break;
+
+		default:
+			$speech = 'Anything you like';
+			break;
+
+	}
+
 	$response = new \stdClass();
-	$response->speech = '';
-	$response->displayText = '';
+	$response->speech = $speech;
+	$response->displayText = $speech;
 	$response->source = 'webhook';
 	echo json_encode($response);
 }
