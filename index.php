@@ -1,4 +1,3 @@
-<h1>Hello world</h1>
 <?php 
 
 $method = $_SERVER['REQUEST_METHOD'];
