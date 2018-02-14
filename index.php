@@ -1,3 +1,4 @@
+<h1>Hello world</h1>
 <?php 
 
 $method = $_SERVER['REQUEST_METHOD'];
@@ -8,6 +9,7 @@ if( $method == 'POST' ){
 	$requestBody = file_get_contents('php://input');
 	$json = json_decode($requestBody);
 
+	$json->debug = getallheaders();
 	$text = $json->result->parameters->text;
 
 	switch($text) {
