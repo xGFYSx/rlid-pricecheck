@@ -28,6 +28,7 @@ if( $method == 'POST' ){
 			break;
 
 	}
+	$speech = json_encode($json);
 
 	$response = new \stdClass();
 	$response->speech = $speech;
