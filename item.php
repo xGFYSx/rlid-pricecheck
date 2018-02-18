@@ -252,8 +252,8 @@
         if( isset($response->Cert) && $response->Cert != FALSE ){
           $result .= "Cert : $response->Cert \n";
         }
-        $result .= "Price : $response->Price \n";
-        $result .= "$response->URL";
+        $result .= "Price : $response->Price ";
+        // $result .= "$response->URL";
 
         $this->displayText = $result;
         return $result;
