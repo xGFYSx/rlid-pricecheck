@@ -256,7 +256,7 @@
 
         // $this->displayText = $result;
         // $this->displayText = $this->speech ;
-        return $this->result;
+        return $result;
       }
 
     }
