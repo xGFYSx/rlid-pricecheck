@@ -1,5 +1,5 @@
 <?php
-echo ini_get('display_errors');
+ini_get('display_errors');
 $method = $_SERVER['REQUEST_METHOD'];
 
 include_once dirname(__FILE__) .DIRECTORY_SEPARATOR.  'response.php' ;
@@ -15,7 +15,7 @@ if( $method == 'POST')
 		$json = json_decode($requestBody);
 
 		if( isset($_GET['debug'] )){
-			if($_GET['debug'] = 'php'):
+			if($_GET['debug'] == 'php'):
 				echo '<pre>'.print_r($json,TRUE).'</pre>';
 			else:
 				echo json_encode($json);
@@ -24,6 +24,16 @@ if( $method == 'POST')
 
 		$text = $json->result->parameters->text;
 		$intent = $json->result->metadata->intentName;
+
+
+		if( $intent == strtolower('price-intent') && $_GET['debug'] == 'php' )
+		{
+			echo 'intent true';
+		}
+		else
+		{
+			echo 'intent false';
+		}
 
 		switch( $intent ):
 
@@ -60,13 +70,7 @@ if( $method == 'POST')
 				$speech = 'Anything you like';
 				break;
 		}
-		// $speech = json_encode($json);
-		//
-		// $response = new \stdClass();
-		// $response->speech = $speech;
-		// $response->displayText = $speech;
-		// $response->source = 'webhook';
-		// echo json_encode($response);
+
 }
 else
 {
