@@ -253,10 +253,10 @@
           $result .= "Cert : $response->Cert \n";
         }
         $result .= "Price : $response->Price ";
-        // $result .= "$response->URL";
 
         $this->displayText = $result;
-        return $result;
+        $this->displayText = $this->speech ;
+        return $this->speech;
       }
 
     }
