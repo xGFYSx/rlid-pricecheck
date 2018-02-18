@@ -254,9 +254,9 @@
         }
         $result .= "Price : $response->Price ";
 
-        $this->displayText = $result;
-        $this->displayText = $this->speech ;
-        return $this->speech;
+        // $this->displayText = $result;
+        // $this->displayText = $this->speech ;
+        return $this->result;
       }
 
     }
