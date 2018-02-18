@@ -26,15 +26,6 @@ if( $method == 'POST')
 		$intent = $json->result->metadata->intentName;
 
 
-		if( $intent == 'price-intent' && $_GET['debug'] == 'php' )
-		{
-			// echo 'intent true';
-		}
-		else
-		{
-			// echo 'intent false<br>'.$intent.'<br>';
-		}
-
 		switch( $intent ):
 
 				case 'price-intent':
@@ -44,32 +35,28 @@ if( $method == 'POST')
 											->setPlatform($json->result->parameters->platform)
 											->getPrice();
 					$response->setText($result);
-					echo json_encode($result);
-					// echo $response->result();
-					// die();
+					die();
 				break;
 
 		endswitch;
 
 
-
+		//normal response
 		switch($text) {
-			case 'hi':
-				$speech = 'Helloo...';
+			case '!credit':
+				$speech = "Special thanks to \n ........";
 				break;
 
-			case 'bye':
-				$speech = 'Gnight';
-				break;
-
-			case 'anything':
-				$speech = 'What should i do master?';
+			case '!help':
+				$speech = '!help - bantuan \n !price <warna> <harga> <platform> \n !credit - ';
 				break;
 
 			default:
 				$speech = 'Anything you like';
 				break;
 		}
+		$response->setText($speech);
+		die();
 
 }
 else

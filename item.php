@@ -2,13 +2,18 @@
 
  class Item {
 
- 	private $apikey = 'GxpvmYEDSXPkkQizT0kvnfGiQyyQsBjK';
-  private $apiUrl = 'https://rl.insider.gg/api/pricebotExternal';
+ 	protected $apikey = 'GxpvmYEDSXPkkQizT0kvnfGiQyyQsBjK';
+  protected  $apiUrl = 'https://rl.insider.gg/api/pricebotExternal';
 
 
   public $error = false;
+  public $error_code = '';
+
   public $item_name = '';
   public $platform = 'pc';
+
+  //response from api
+  public $response = false;
 
 
   /*
@@ -119,6 +124,9 @@
 
       endswitch;
 
+      $this->error = true;
+      $this->error_code = $msg;
+
       $this->result($msg);
   }
 
@@ -166,24 +174,30 @@
       CURLOPT_HTTPHEADER => array(
         "x-api-key: " . $this->apikey
       ),
+      CURLOPT_RETURNTRANSFER => TRUE
     ));
-
     $response = curl_exec($curl);
     $err = curl_error($curl);
 
     curl_close($curl);
+    $this->response = json_decode($response);
 
     if ($err) {
       $this->error($err);
     }
     else {
-      $this->_makeResponse($response);
+      return $this->_makeResponse($response);
     }
  	}
 
-  function _makeResponse($response)
+
+  /**
+   * makeResponse
+   * @return [str]           [formatted str]
+   */
+  function _makeResponse()
   {
-      $response = json_decode($response);
+      $response = $this->response;
 
       //check error
       if( isset($response->ErrorCode) )
@@ -204,7 +218,19 @@
         }
       }
       else{
-        return json_encode($response);
+        $result ='';
+
+        if( isset($response->PaintName) && $response->PaintName != 'Default' ){
+          $result .= "$response->PaintName ";
+        }
+        $result .= "$response->ItemName \n";
+
+        if( isset($response->Cert) && $response->Cert != FALSE ){
+          $result .= "Cert : $response->Cert \n";
+        }
+        $result .= "Price : $response->Price \n";
+        $result .= "$response->URL";
+        return $result;
       }
 
     }

@@ -14,11 +14,16 @@ class ResponseMsg {
   {
     $this->__set( 'speech', $text );
     $this->__set( 'displayText', $text );
+    return $this;
   }
 
   public function result()
   {
-    return json_decode($this);
+    $result = new stdClass;
+    $result->speech = $this->speech;
+    $result->displayText = $this->displayText;
+    $result->source = $this->source;
+    return json_encode($result);
   }
 
 }
