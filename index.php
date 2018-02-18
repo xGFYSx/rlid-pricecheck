@@ -34,7 +34,7 @@ if( $method == 'POST')
 											->setItem($json->result->parameters->item_color, $json->result->parameters->itemname)
 											->setPlatform($json->result->parameters->platform)
 											->getPrice();
-					$response->setText($result);
+					echo $response->setText($result);
 					die();
 				break;
 
@@ -55,7 +55,7 @@ if( $method == 'POST')
 				$speech = 'Anything you like';
 				break;
 		}
-		$response->setText($speech);
+		echo $response->setText($speech);
 		die();
 
 }
