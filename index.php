@@ -16,7 +16,7 @@ if( $method == 'POST')
 
 		if( isset($_GET['debug'] )){
 			if($_GET['debug'] == 'php'):
-				echo '<pre>'.print_r($json,TRUE).'</pre>';
+				echo '<pre>'.print_r($json->result,TRUE).'</pre>';
 			else:
 				echo json_encode($json);
 			endif;
@@ -32,7 +32,8 @@ if( $method == 'POST')
 		}
 		else
 		{
-			echo 'intent false';
+			echo 'intent false<br>';
+			print_r($json->result->metadata->intentName;);
 		}
 
 		switch( $intent ):
