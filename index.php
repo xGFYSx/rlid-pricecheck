@@ -32,8 +32,7 @@ if( $method == 'POST')
 		}
 		else
 		{
-			echo 'intent false<br>';
-			print_r($json->result->metadata);
+			echo 'intent false<br>'.$intent.'<br>';
 		}
 
 		switch( $intent ):
