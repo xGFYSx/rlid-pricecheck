@@ -1,5 +1,6 @@
 <?php
-ini_get('display_errors');
+error_reporting( E_ALL );
+ini_set('display_errors',1);
 $method = $_SERVER['REQUEST_METHOD'];
 
 include_once dirname(__FILE__) .DIRECTORY_SEPARATOR.  'response.php' ;
@@ -9,7 +10,7 @@ $response = new ResponseMsg;
 
 
 // Process only when method is POST
-if( $method == 'POST')
+if( $method )
 {
 		$requestBody = file_get_contents('php://input');
 		$json = json_decode($requestBody);
@@ -22,7 +23,9 @@ if( $method == 'POST')
 			endif;
 		}
 
-		$text = $json->result->parameters->text;
+		if( isset($json->result->parameters->text) ){
+			$text = $json->result->parameters->text;
+		}
 		$intent = $json->result->metadata->intentName;
 
 
@@ -34,7 +37,7 @@ if( $method == 'POST')
 											->setItem($json->result->parameters->item_color, $json->result->parameters->itemname)
 											->setPlatform($json->result->parameters->platform)
 											->getPrice();
-					echo $response->setText($result);
+					echo $response->setText($result)->result();
 					die();
 				break;
 
@@ -55,7 +58,7 @@ if( $method == 'POST')
 				$speech = 'Anything you like';
 				break;
 		}
-		echo $response->setText($speech);
+		echo $response->setText($speech)->result();
 		die();
 
 }
