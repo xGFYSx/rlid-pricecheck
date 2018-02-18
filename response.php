@@ -10,9 +10,9 @@ class ResponseMsg {
       $this->$name = $value;
   }
 
-  public function setText($text)
+  public function setText($speech,$text)
   {
-    $this->__set( 'speech', trim(preg_replace('/\s+/', ' ', $text)) );
+    $this->__set( 'speech', trim(preg_replace('/\s+/', ' ', $speech)) );
     $this->__set( 'displayText', $text );
     return $this;
   }

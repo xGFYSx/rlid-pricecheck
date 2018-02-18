@@ -15,6 +15,12 @@
   //response from api
   public $response = false;
 
+  //response Speech
+  public $speech;
+
+  //response displayText
+  public $displayText;
+
 
   /*
    * [setItem description]
@@ -127,6 +133,11 @@
       $this->error = true;
       $this->error_code = $msg;
 
+      //
+      $this->speech = $msg;
+      if( (is_int($code) AND $code ==5) ){
+        $this->speech = 'Duplicate Item';
+      }
       $this->result($msg);
   }
 
@@ -151,7 +162,7 @@
    * https://rl.insider.gg/api/pricebotExternal
    * @param  [type] $item     [paint+item name] ex: "white zomba"
    * @param  [type] $platform [pc,ps4]
-   * @return [type]           [description]
+   * @return [str]           [displayText]
    */
 
  	function getPrice()
@@ -218,18 +229,33 @@
         }
       }
       else{
+
+        //define paint
+        $paint = '';
+        if( isset($response->PaintName) && $response->PaintName != 'Default' ){
+          $paint = "$response->PaintName";
+        }
+
+        //define cert
+        $cert = '';
+        if( isset($response->Cert) && $response->Cert != FALSE ){
+          $cert = "$response->Cert";
+        }
+
+        //generate Speech
+        $this->speech = "The price for $paint $cert $response->ItemName is $response->Price key";
+
         $result ='';
 
-        if( isset($response->PaintName) && $response->PaintName != 'Default' ){
-          $result .= "$response->PaintName ";
-        }
-        $result .= "$response->ItemName \n";
+        $result .= $paint."$response->ItemName \n";
 
         if( isset($response->Cert) && $response->Cert != FALSE ){
           $result .= "Cert : $response->Cert \n";
         }
         $result .= "Price : $response->Price \n";
         $result .= "$response->URL";
+
+        $this->displayText = $result;
         return $result;
       }
 
