@@ -26,7 +26,7 @@ if( $method == 'POST')
 		$intent = $json->result->metadata->intentName;
 
 
-		if( $intent == strtolower('price-intent') && $_GET['debug'] == 'php' )
+		if( $intent == 'price-intent' && $_GET['debug'] == 'php' )
 		{
 			echo 'intent true';
 		}
