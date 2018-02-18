@@ -1,16 +1,26 @@
 <?php
+ini_get('display_errors');
+$method = $_SERVER['REQUEST_METHOD'];
+
 include_once dirname(__FILE__) .DIRECTORY_SEPARATOR.  'response.php' ;
 include_once dirname(__FILE__) .DIRECTORY_SEPARATOR. 'item.php' ;
 
 $response = new ResponseMsg;
 
-$method = $_SERVER['REQUEST_METHOD'];
 
 // Process only when method is POST
-if( $method == 'POST' )
+if( $method == 'POST')
 {
 		$requestBody = file_get_contents('php://input');
 		$json = json_decode($requestBody);
+
+		if( isset($_GET['debug'] )){
+			if($_GET['debug'] = 'php'):
+				echo '<pre>'.print_r($json,TRUE).'</pre>';
+			else:
+				echo json_encode($json);
+			endif;
+		}
 
 		$text = $json->result->parameters->text;
 		$intent = $json->result->metadata->intentName;
@@ -22,7 +32,7 @@ if( $method == 'POST' )
 					$result = $item->setItem($json->parameters->item_color, $json->parameters->itemname)->getPrice();
 					$response->setText($result);
 					echo $response->result();
-					die();
+					// die();
 				break;
 
 		endswitch;
