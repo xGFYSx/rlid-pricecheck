@@ -29,10 +29,13 @@ if( $method == 'POST')
 
 				case 'price-intent':
 					$item = new Item;
-					$result = $item->setItem($json->parameters->item_color, $json->parameters->itemname)->getPrice();
+					$result = $item
+											->setItem($json->result->parameters->item_color, $json->result->parameters->itemname)
+											->setPlatform($json->result->parameters->platform)
+											->getPrice();
 					$response->setText($result);
 					echo $response->result();
-					// die();
+					die();
 				break;
 
 		endswitch;
