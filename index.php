@@ -1,43 +1,62 @@
-<?php 
+<?php
+include_once dirname(__FILE__) .DIRECTORY_SEPARATOR.  'response.php' ;
+include_once dirname(__FILE__) .DIRECTORY_SEPARATOR. 'item.php' ;
+
+$response = new ResponseMsg;
 
 $method = $_SERVER['REQUEST_METHOD'];
 
 // Process only when method is POST
+if( $method == 'POST' )
+{
+		$requestBody = file_get_contents('php://input');
+		$json = json_decode($requestBody);
 
-if( $method == 'POST' ){
-	$requestBody = file_get_contents('php://input');
-	$json = json_decode($requestBody);
+		$text = $json->result->parameters->text;
+		$intent = $json->result->metadata->intentName;
 
-	$text = $json->result->parameters->text;
+		switch( $intent ):
 
-	switch($text) {
-		case 'hi':
-			$speech = 'Helloo...';
-			break;
+				case 'price-intent':
+					$item = new Item;
+					$result = $item->setItem($json->parameters->item_color, $json->parameters->itemname)->getPrice();
+					$response->setText($result);
+					echo $response->result();
+					die();
+				break;
 
-		case 'bye':
-			$speech = 'Gnight';
-			break;
+		endswitch;
 
-		case 'anything':
-			$speech = 'What should i do master?';
-			break;
 
-		default:
-			$speech = 'Anything you like';
-			break;
 
-	}
-	$speech = json_encode($json);
+		switch($text) {
+			case 'hi':
+				$speech = 'Helloo...';
+				break;
 
-	$response = new \stdClass();
-	$response->speech = $speech;
-	$response->displayText = $speech;
-	$response->source = 'webhook';
-	echo json_encode($response);
+			case 'bye':
+				$speech = 'Gnight';
+				break;
+
+			case 'anything':
+				$speech = 'What should i do master?';
+				break;
+
+			default:
+				$speech = 'Anything you like';
+				break;
+		}
+		// $speech = json_encode($json);
+		//
+		// $response = new \stdClass();
+		// $response->speech = $speech;
+		// $response->displayText = $speech;
+		// $response->source = 'webhook';
+		// echo json_encode($response);
 }
-else{
-	echo 'Not allowed';
+else
+{
+		echo 'Not allowed';
 }
 
 ?>
