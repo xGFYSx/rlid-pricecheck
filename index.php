@@ -28,11 +28,11 @@ if( $method == 'POST')
 
 		if( $intent == 'price-intent' && $_GET['debug'] == 'php' )
 		{
-			echo 'intent true';
+			// echo 'intent true';
 		}
 		else
 		{
-			echo 'intent false<br>'.$intent.'<br>';
+			// echo 'intent false<br>'.$intent.'<br>';
 		}
 
 		switch( $intent ):
