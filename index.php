@@ -1,5 +1,5 @@
 <?php
-ini_get('display_errors');
+echo ini_get('display_errors');
 $method = $_SERVER['REQUEST_METHOD'];
 
 include_once dirname(__FILE__) .DIRECTORY_SEPARATOR.  'response.php' ;
@@ -34,8 +34,9 @@ if( $method == 'POST')
 											->setPlatform($json->result->parameters->platform)
 											->getPrice();
 					$response->setText($result);
-					echo $response->result();
-					die();
+					echo json_encode($result);
+					// echo $response->result();
+					// die();
 				break;
 
 		endswitch;
