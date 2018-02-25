@@ -26,7 +26,7 @@ if( $method )
 
 		//check the text
 		if( isset($json->result->resolvedQuery) ){
-			$json->result->resolvedQuery
+			$text = $json->result->resolvedQuery;
 		}
 
 		//check action
