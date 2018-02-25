@@ -30,7 +30,9 @@ if( $method )
 		}
 
 		//check action
-		$action = $json->result->action;
+		if( isset($json->result->action) ){
+			$action = $json->result->action;
+		}
 
 		//check action, future implementation
 		switch( $action ):
