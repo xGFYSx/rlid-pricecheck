@@ -216,6 +216,7 @@
   function _makeResponse()
   {
       $response = $this->response;
+      print_r($response);die();
 
       //check error
       if( isset($response->ErrorCode) )
@@ -236,19 +237,8 @@
         }
       }
       else{
-        
-        print_r($response, true);
-        //define paint
-        $paint = '';
-        if( isset($response->PaintName) && $response->PaintName != 'Default' ){
-          $paint = "$response->PaintName";
-        }
 
-        //define cert
-        $cert = '';
-        if( isset($response->Cert) && $response->Cert != FALSE ){
-          $cert = "$response->Cert";
-        }
+        // print_r($response, true);
 
         //generate Speech
         $this->speech = "The price for $response->ItemName is $response->Price key";
