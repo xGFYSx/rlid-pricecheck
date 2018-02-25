@@ -270,11 +270,14 @@
           $result .= "$cert  ";
         }
 
+        $result .= "\xE2\x9E\xA1 Nama Item : ";
+        
+        //add color before item name
         if( $color != FALSE ){
           $result .= "$color ";
         }
+        $result .="$response->ItemName \n";
 
-        $result .= "\xE2\x9E\xA1 Nama Item : $response->ItemName \n";
         $result .= "\xF0\x9F\x8E\xAE Platform : ".strtoupper($this->platform)." \n";
         $result .= "\xF0\x9F\x94\x91 Price : $response->Price \n";
         $result .= "\xF0\x9F\x8C\x90 $response->URL \n";
