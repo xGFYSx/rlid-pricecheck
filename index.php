@@ -57,11 +57,11 @@ if( $method )
 		//normal response
 		switch($text) {
 			case '!credit':
-				$text = "Special thanks to:\n Ruffe - Ananta Rizki F. (Mastermind) \nxGFYSx - Dewantara Tirta (Programmer)\nFRDS  - Agung Firdaus (Tester and Helper)\nDevs at RL Insider (Yggdrasil128 and colleagues)";
+				$text = "Special thanks to:\n \xF0\x9F\x94\xB5 Ruffe - Ananta Rizki F. (Mastermind) \n \xF0\x9F\x94\xB5 xGFYSx - Dewantara Tirta (Programmer)\n \xF0\x9F\x94\xB5 FRDS  - Agung Firdaus (Tester and Helper)\n \xF0\x9F\x94\xB5 Devs at RL Insider (Yggdrasil128 and colleagues)";
 				break;
 
 			case '!help':
-				$text = "Daftar perintah :\n!help - Menampilkan pesan panduan\n!price <nama item> <warna (optional)> <platform> - Mengecek harga item\n!credit - Menampilkan pesan credit";
+				$text = "\xE2\x9A\xA0 Daftar perintah :\n!help - Menampilkan pesan panduan\n!price <nama item> <warna (optional)> <platform> - Mengecek harga item\n!credit - Menampilkan pesan credit";
 				break;
 		}
 		echo $response->setText($text,$text)->result();
