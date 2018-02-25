@@ -57,11 +57,18 @@ if( $method )
 		//normal response
 		switch($text) {
 			case '!credit':
-				$text = "Special thanks to \n ........";
+				$text = "Special thanks to \n
+				Ruffe - Ananta Rizki F. (Mastermind) \n
+				xGFYSx - Dewantara Tirta (Programmer)\n
+				FRDS  - Agung Firdaus (Tester and Helper)\n
+				Devs at RL Insider (Yggdrasil128 and colleagues)";
 				break;
 
 			case '!help':
-				$text = "!help - bantuan \n !price <warna> <harga> <platform> \n !credit - ";
+				$text = "Daftar perintah : \n
+				!help - Menampilkan pesan panduan \n
+				!price <platform> <nama item dan warna> - Mengecek harga item \n
+				!credit - Menampilkan pesan credit";
 				break;
 
 			default:
