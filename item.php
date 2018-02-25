@@ -9,8 +9,10 @@
   public $error = false;
   public $error_code = '';
 
-  public $item_name = '';
+  public $query = '';
   public $platform = 'pc';
+
+  public $default_platform;
 
   //response from api
   public $response = false;
@@ -22,30 +24,35 @@
   public $displayText;
 
 
+  //set default platform
+  public function __construct(){
+
+    $this->default_platform = array(
+        'pc' => array( 'pc', 'steam' ),
+        'ps4' => array( 'ps4', 'ps' )
+      );
+
+  }
+
+
   /*
-   * [setItem description]
+   * [setQuery]
    * @param [array] $paint [description]
-   * @param [array] $item  [description]
    */
-  function setItem($paint, $item)
+  function setQuery($query)
   {
-      $item_name='';
+    //remove !price from string
+    $query = str_replace('!price ', '', $query);
 
-      if( count($paint) > 0 ){
-        foreach($paint as $key => $val){
-          $item_name .= $val . ' ';
-        }
-      }
+    //remove platform from string
+    foreach( $this->default_platform as $var ) {
+       foreach( $var as $varr ){
+        $query = str_replace($varr, '', $query);
+       }
+    }
 
-      //cek item kosong
-      if(count($item)==0){
-        $this->error(0);
-      }
-      //item yang digunakan adl item pertama (jika terdapat byk item)
-      $item_name = $item[0];
-
-      $this->item_name = $item_name;
-      return $this;
+    $this->query = $query;
+    return $this;
   }
 
 

@@ -28,15 +28,17 @@ if( $method )
 		if( isset($json->result->parameters->text) ){
 			$text = $json->result->parameters->text;
 		}
-		$intent = $json->result->metadata->intentName;
 
-		//check intent, future implementation
-		switch( $intent ):
+		//check action
+		$action = $json->result->action;
 
-				case 'price-intent':
+		//check action, future implementation
+		switch( $action ):
+
+				case 'checkprice':
 					$item = new Item;
 					$result = $item
-											->setItem($json->result->parameters->item_color, $json->result->parameters->itemname)
+											->setQuery($json->result->resolvedQuery)
 											->setPlatform($json->result->parameters->platform)
 											->getPrice();
 					echo $response->setText($item->speech,$result)->result();
