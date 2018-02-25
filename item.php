@@ -274,7 +274,7 @@
           $result .= "$color ";
         }
 
-        $result .= "$response->ItemName \n";
+        $result .= "\uDBC0 Nama Item : $response->ItemName \n";
         $result .= "Platform : ".strtoupper($this->platform)." \n";
         $result .= "Price : $response->Price \n";
         $result .= "$response->URL \n";
