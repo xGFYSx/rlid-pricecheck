@@ -12,7 +12,8 @@ class ResponseMsg {
 
   public function setText($speech,$text)
   {
-    $this->__set( 'speech', trim(preg_replace('/\s+/', ' ', $speech)) );
+    // $this->__set( 'speech', trim(preg_replace('/\s+/', ' ', $speech)) );
+    $this->__set( 'speech', $speech );
     $this->__set( 'displayText', $text );
     return $this;
   }
