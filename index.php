@@ -61,7 +61,7 @@ if( $method )
 				break;
 
 			case '!help':
-				$text = "￼ Daftar perintah :\n!help - Menampilkan pesan panduan\n!price <nama item> <warna (optional)> <platform> - Mengecek harga item\n!credit - Menampilkan pesan credit";
+				$text = "\xE2\x9D\x97 Daftar perintah :\n \xE2\x97\xBE !help - Menampilkan pesan panduan\n \xE2\x97\xBE !price <nama item> <warna (optional)> <platform> - Mengecek harga item\n \xE2\x97\xBE !credit - Menampilkan pesan credit";
 				break;
 
 			//no response (biar gak duplikat, atau ngulang kalimat kita)
