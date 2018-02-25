@@ -275,7 +275,7 @@
         }
 
         $result .= "$response->ItemName \n";
-        $result .= "Platform : ".strtotupper($this->platform)." \n";
+        $result .= "Platform : ".strtoupper($this->platform)." \n";
         $result .= "Price : $response->Price \n";
         $result .= "$response->URL \n";
 
