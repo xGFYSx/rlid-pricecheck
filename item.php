@@ -56,9 +56,6 @@
   }
 
 
-
-
-
   /**
    * setPlatform
    * @param string $platform [pc,ps4]
@@ -238,19 +235,49 @@
       }
       else{
 
-        // print_r($response, true);
+        $cert = FALSE;
+        $color = FALSE;
+
+        //check  cert
+        if( isset($response->Cert) && $response->Cert != FALSE ){
+          $cert = $response->Cert;
+        }
+
+        //check color
+        if( isset($response->PaintName) && strtolower($response->PaintName) != 'default' ){
+          $color = $response->PaintName;
+        }
 
         //generate Speech
-        $this->speech = "The price for $response->ItemName is $response->Price key";
+        $this->speech = "The price for ";
 
+        //check cert
+        if( ! $cert ){
+          $this->speech .= "$cert  ";
+        }
+
+        //check color
+        if( ! $color ){
+          $this->speech .= "$color ";
+        }
+
+        $this->speech .= "$response->ItemName is $response->Price keys";
+
+        //generate displayText
         $result ='';
 
-        $result .= $paint."$response->ItemName \n";
-
-        if( isset($response->Cert) && $response->Cert != FALSE ){
-          $result .= "Cert : $response->Cert \n";
+        if( ! $cert ){
+          $result .= "$cert  ";
         }
-        $result .= "Price : $response->Price ";
+
+        if( ! $color ){
+          $result .= "$color ";
+        }
+
+        $result .= "$response->ItemName \n";
+        $result .= "Platform : $this->platform \n";
+        $result .= "Price : $response->Price \n";
+        $result .= "$response->URL \n";
 
         // $this->displayText = $result;
         // $this->displayText = $this->speech ;
