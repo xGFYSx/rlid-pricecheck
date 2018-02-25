@@ -274,10 +274,10 @@
           $result .= "$color ";
         }
 
-        $result .= "\u{FE0F} Nama Item : $response->ItemName \n";
-        $result .= "\u{1F3AE} Platform : ".strtoupper($this->platform)." \n";
-        $result .= "\u{1F511} Price : $response->Price \n";
-        $result .= "\u{1F517} $response->URL \n";
+        $result .= "\u2139 Nama Item : $response->ItemName \n";
+        $result .= "\u1F3AE Platform : ".strtoupper($this->platform)." \n";
+        $result .= "\u1F511 Price : $response->Price \n";
+        $result .= "\u1F310 $response->URL \n";
 
         return $result;
       }
