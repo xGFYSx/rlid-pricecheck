@@ -176,7 +176,7 @@
  	{
     $data = array(
         'platform' => $this->platform,
-        'item' => $this->item_name
+        'item' => $this->query
     );
 
     $curl = curl_init();
@@ -236,7 +236,8 @@
         }
       }
       else{
-
+        
+        print_r($response, true);
         //define paint
         $paint = '';
         if( isset($response->PaintName) && $response->PaintName != 'Default' ){
@@ -250,7 +251,7 @@
         }
 
         //generate Speech
-        $this->speech = "The price for $paint $cert $response->ItemName is $response->Price key";
+        $this->speech = "The price for $response->ItemName is $response->Price key";
 
         $result ='';
 
