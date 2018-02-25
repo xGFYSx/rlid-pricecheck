@@ -61,11 +61,7 @@ if( $method )
 				break;
 
 			case '!help':
-				$text = "Daftar perintah :\n!help - Menampilkan pesan panduan\n!price <platform> <nama item dan warna> - Mengecek harga item\n!credit - Menampilkan pesan credit";
-				break;
-
-			default:
-				$text = "Anything you like";
+				$text = "Daftar perintah :\n!help - Menampilkan pesan panduan\n!price <nama item> <warna (optional)> <platform> - Mengecek harga item\n!credit - Menampilkan pesan credit";
 				break;
 		}
 		echo $response->setText($text,$text)->result();
