@@ -204,7 +204,7 @@
       $this->error($err);
     }
     else {
-      return $response
+      return $response;
       // return $this->_makeResponse($response);
     }
  	}
