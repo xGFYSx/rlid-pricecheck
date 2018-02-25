@@ -216,7 +216,6 @@
   function _makeResponse()
   {
       $response = $this->response;
-      print_r($response);die();
 
       //check error
       if( isset($response->ErrorCode) )

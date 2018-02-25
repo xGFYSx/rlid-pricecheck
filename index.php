@@ -37,10 +37,10 @@ if( $method )
 
 				case 'checkprice':
 					$item = new Item;
-					$result = $item
-											->setQuery($json->result->resolvedQuery)
-											->setPlatform($json->result->parameters->platform)
-											->getPrice();
+					$result = $item->setQuery($json->result->resolvedQuery)
+													->setPlatform($json->result->parameters->platform)
+													->getPrice();
+				  print_r($result);die();
 					echo $response->setText($item->speech,$result)->result();
 					die();
 				break;
