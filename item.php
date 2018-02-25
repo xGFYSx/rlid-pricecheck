@@ -270,7 +270,7 @@
           $result .= "$cert  ";
         }
 
-        $result .= "\xE2\x9E\xA1 Nama Item : ";
+        $result .= "\xE2\x9E\xA1 ";
         
         //add color before item name
         if( $color != FALSE ){
