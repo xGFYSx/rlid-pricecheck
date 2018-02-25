@@ -239,7 +239,7 @@
         $color = FALSE;
 
         //check  cert
-        if( isset($response->Cert) && $response->Cert != FALSE ){
+        if( isset($response->Cert) && $response->Cert != 'false' ){
           $cert = $response->Cert;
         }
 
@@ -252,12 +252,12 @@
         $this->speech = "The price for ";
 
         //check cert
-        if( ! $cert ){
+        if( $cert != FALSE ){
           $this->speech .= "$cert  ";
         }
 
         //check color
-        if( ! $color ){
+        if( $color != FALSE){
           $this->speech .= "$color ";
         }
 
@@ -266,11 +266,11 @@
         //generate displayText
         $result ='';
 
-        if( ! $cert ){
+        if( $cert != FALSE ){
           $result .= "$cert  ";
         }
 
-        if( ! $color ){
+        if( $color != FALSE ){
           $result .= "$color ";
         }
 
