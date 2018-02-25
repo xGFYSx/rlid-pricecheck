@@ -275,12 +275,10 @@
         }
 
         $result .= "$response->ItemName \n";
-        $result .= "Platform : $this->platform \n";
+        $result .= "Platform : strtoupper($this->platform) \n";
         $result .= "Price : $response->Price \n";
         $result .= "$response->URL \n";
 
-        // $this->displayText = $result;
-        // $this->displayText = $this->speech ;
         return $result;
       }
 

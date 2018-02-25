@@ -25,8 +25,8 @@ if( $method )
 		}
 
 		//check the text
-		if( isset($json->result->parameters->text) ){
-			$text = $json->result->parameters->text;
+		if( isset($json->result->resolvedQuery) ){
+			$json->result->resolvedQuery
 		}
 
 		//check action
@@ -56,11 +56,11 @@ if( $method )
 				break;
 
 			case '!help':
-				$text = '!help - bantuan \n !price <warna> <harga> <platform> \n !credit - ';
+				$text = "!help - bantuan \n !price <warna> <harga> <platform> \n !credit - ";
 				break;
 
 			default:
-				$text = 'Anything you like';
+				$text = "Anything you like";
 				break;
 		}
 		echo $response->setText($text,$text)->result();
