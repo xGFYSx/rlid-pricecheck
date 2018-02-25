@@ -40,8 +40,9 @@ if( $method )
 					$result = $item->setQuery($json->result->resolvedQuery)
 													->setPlatform($json->result->parameters->platform)
 													->getPrice();
-					// print_r($result);
-					echo $response->setText($item->speech,$result)->result();
+
+					// echo $response->setText($item->speech,$result)->result();
+					echo $response->setText( $result ,$result)->result();
 					die();
 				break;
 
