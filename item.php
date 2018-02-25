@@ -201,8 +201,8 @@
       $this->error($err);
     }
     else {
-      return $response;
-      // return $this->_makeResponse($response);
+      // return $response;
+      return $this->_makeResponse($response);
     }
  	}
 
