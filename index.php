@@ -35,20 +35,23 @@ if( $method )
 		}
 
 		//check action, future implementation
-		switch( $action ):
+		if( isset($action) ){
 
-				case 'checkprice':
-					$item = new Item;
-					$result = $item->setQuery($json->result->resolvedQuery)
-													->setPlatform($json->result->parameters->platform)
-													->getPrice();
+			switch( $action ):
 
-					// echo $response->setText($item->speech,$result)->result();
-					echo $response->setText( $result ,$result)->result();
-					die();
-				break;
+					case 'checkprice':
+						$item = new Item;
+						$result = $item->setQuery($json->result->resolvedQuery)
+														->setPlatform($json->result->parameters->platform)
+														->getPrice();
 
-		endswitch;
+						// echo $response->setText($item->speech,$result)->result();
+						echo $response->setText( $result ,$result)->result();
+						die();
+					break;
+
+			endswitch;
+		}
 
 
 		//normal response
