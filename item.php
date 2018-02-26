@@ -137,7 +137,6 @@
       $this->error = true;
       $this->error_code = $msg;
 
-      //
       $this->speech = $msg;
       return $msg;
   }
@@ -215,7 +214,6 @@
       //check error
       if( isset($response->ErrorCode) )
       {
-        return json_encode($this->response);
         //jika multiple items
         if($response->ErrorCode == '4')
         {
@@ -224,11 +222,11 @@
           {
             $err .= "$val \n";
           }
-          $this->error(5,$err);
+          return $this->error(5,$err);
         }
         else //error yg lain
         {
-            $this->error( $response->ErrorCode + 1 );
+            return $this->error( $response->ErrorCode + 1 );
         }
       }
       else{
