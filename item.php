@@ -215,6 +215,7 @@
       //check error
       if( isset($response->ErrorCode) )
       {
+        return json_encode($this->response);
         //jika multiple items
         if($response->ErrorCode == '4')
         {
