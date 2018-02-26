@@ -139,10 +139,7 @@
 
       //
       $this->speech = $msg;
-      if( (is_int($code) AND $code ==5) ){
-        $this->speech = 'Duplicate Item';
-      }
-      $this->result($msg);
+      return $msg;
   }
 
 
