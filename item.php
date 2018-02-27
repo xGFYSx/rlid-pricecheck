@@ -114,7 +114,7 @@
         break;
 
         case 3:
-            $msg = "\xE2\x9A\xA0 " . $this->response->ItemName" tidak ada dalam warna " . $this->response->PaintName"\nFull pricelist cek di https://rl.insider.gg.";
+            $msg = "\xE2\x9A\xA0 " . $this->response->ItemName." tidak ada dalam warna " . $this->response->PaintName"\nFull pricelist cek di https://rl.insider.gg.";
         break;
 
         case 4:
