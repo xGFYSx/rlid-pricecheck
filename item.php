@@ -206,7 +206,7 @@
       $error_code = $this->error_code;
 
       //check error
-      if( isset($error_code)
+      if( isset($error_code))
       {
       	return $this->error($error_code);
       }
