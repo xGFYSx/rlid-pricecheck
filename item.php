@@ -2,7 +2,7 @@
 
  class Item {
 
- 	protected $apikey = 'GxpvmYEDSXPkkQizT0kvnfGiQyyQsBjK';
+  protected $apikey = 'GxpvmYEDSXPkkQizT0kvnfGiQyyQsBjK';
   protected  $apiUrl = 'https://rl.insider.gg/api/pricebotExternal';
 
 
@@ -34,25 +34,28 @@
 
   }
 
-
   /*
    * [setQuery]
    * @param [array] $paint [description]
    */
   function setQuery($query)
   {
-    //remove !price from string
-    $query = str_replace('!price ', '', $query);
+  	if( strlen($query)<= 7 ){
+ 		return $this->error(0);
+	} else {
+	    //remove !price from string
+	    $query = str_replace('!price ', '', $query);
 
-    //remove platform from string
-    foreach( $this->default_platform as $var ) {
-       foreach( $var as $varr ){
-        $query = str_replace($varr, '', $query);
-       }
-    }
+	    //remove platform from string
+	    foreach( $this->default_platform as $var ) {
+	       foreach( $var as $varr ){
+	        $query = str_replace($varr, '', $query);
+	       }
+	    }
 
-    $this->query = $query;
-    return $this;
+	    $this->query = $query;
+	    return $this;
+	}
   }
 
 
@@ -89,9 +92,6 @@
       return $this;
   }
 
-
-
-
   /**
    * error (define error message)
    * @param  [int] $code [description]
@@ -102,7 +102,7 @@
       switch($code):
 
         case 0:
-            $msg = "\xE2\x9A\xA0 Itemnya diisi dulu ga\n\xE2\x9E\xA1 Full pricelist cek di https://rl.insider.gg";
+            $msg = "\xE2\x9A\xA0 Itemnya diisi dulu gan.";
         break;
 
         case 1:
@@ -141,9 +141,6 @@
       $this->speech = $msg;
       return $msg;
   }
-
-
-
 
   /**
    * [result description]
