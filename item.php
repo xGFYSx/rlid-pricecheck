@@ -101,7 +101,7 @@
       switch($code):
 
         case 0:
-            $msg = "\xE2\x9A\xA0 Itemnya diisi dulu gan.";
+            $msg = "\xE2\x9A\xA0 Nama itemnya diisi dulu gan\n\xE2\x9E\xA1 Full pricelist cek di https://rl.insider.gg";
         break;
 
         case 1:
