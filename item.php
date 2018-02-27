@@ -41,7 +41,8 @@
   function setQuery($query)
   {
   	if( strlen($query)<= 7 ){
- 		return $this->error(0);
+ 		$this->error(0);
+ 		return $this;
 	} else {
 	    //remove !price from string
 	    $query = str_replace('!price ', '', $query);
