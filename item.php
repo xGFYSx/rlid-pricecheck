@@ -102,28 +102,29 @@
       switch($code):
 
         case 0:
-            $msg = 'Itemnya diisi dulu gan';
+            $msg = "\xE2\x9A\xA0 Itemnya diisi dulu ga\n\xE2\x9E\xA1 Full pricelist cek di https://rl.insider.gg";
         break;
 
         case 1:
-            $msg = "\xE2\x9A\xA0 Platform yang tersedia hanya PC dan PS4\nFull pricelist cek di https://rl.insider.gg.";
+            $msg = "\xE2\x9A\xA0 Platform yang tersedia hanya PC dan PS4\n\xE2\x9E\xA1 Full pricelist cek di https://rl.insider.gg";
         break;
 
         case 2:
-            $msg = "\xE2\x9A\xA0 Item ini tidak ada di platform " . strtoupper($this->platform) . "\nFull pricelist cek di https://rl.insider.gg.";
+            $msg = "\xE2\x9A\xA0 Item ini tidak ada di platform " . strtoupper($this->platform) . "\n\xE2\x9E\xA1 Full pricelist cek di https://rl.insider.gg";
         break;
 
         case 3:
-            $msg = "\xE2\x9A\xA0 " . $this->response->ItemName." tidak ada dalam warna " . $this->response->PaintName."\nFull pricelist cek di https://rl.insider.gg.";
+            $msg = "\xE2\x9A\xA0 " . $this->response->ItemName." tidak ada dalam warna " . $this->response->PaintName."\n\xE2\x9E\xA1 Full pricelist cek di https://rl.insider.gg";
         break;
 
         case 4:
-            $msg = "\xE2\x9A\xA0Belum ada harga untuk item ini \nFull pricelist cek di https://rl.insider.gg.";
+            $msg = "\xE2\x9A\xA0 Belum ada harga untuk item ini \n\xE2\x9E\xA1 Full pricelist cek di https://rl.insider.gg";
         break;
 
         case 5:
-            $msg = "Duplicate Item! \n";
+            $msg = "\xE2\x9D\x93 Apakah anda mencari item ini?\n";
             $msg .= $external_msg;
+            $msg .= "\n\xE2\x9E\xA1 Full pricelist cek di https://rl.insider.gg";
         break;
 
 
