@@ -106,19 +106,19 @@
         break;
 
         case 1:
-            $msg = 'Platform yang tersedia hanya pc dan ps4';
+            $msg = "\xE2\x9A\xA0 Platform yang tersedia hanya PC dan PS4\nFull pricelist cek di https://rl.insider.gg.";
         break;
 
         case 2:
-            $msg = 'Item ini tidak ada di platform ' . strtoupper($this->platform);
+            $msg = "\xE2\x9A\xA0 Item ini tidak ada di platform " . strtoupper($this->platform) . "\nFull pricelist cek di https://rl.insider.gg.";
         break;
 
         case 3:
-            $msg = 'Tidak ada warna tersebut pada item ini ';
+            $msg = "\xE2\x9A\xA0 " . $this->response->ItemName" tidak ada dalam warna " . $this->response->PaintName"\nFull pricelist cek di https://rl.insider.gg.";
         break;
 
         case 4:
-            $msg = 'Belum ada harga untuk item ini';
+            $msg = "\xE2\x9A\xA0Belum ada harga untuk item ini \nFull pricelist cek di https://rl.insider.gg.";
         break;
 
         case 5:
@@ -153,8 +153,6 @@
       $this->response = $msg;
       return $msg;
   }
-
-
 
 
   /**
