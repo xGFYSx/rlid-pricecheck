@@ -122,7 +122,7 @@
         break;
 
         case 5:
-            $msg = "\xE2\x9D\x93 Apakah anda mencari item ini?\n";
+            $msg = "\xE2\x9D\x93 Apakah anda mencari item ini?\n\n";
             $msg .= $external_msg;
             $msg .= "\n\xE2\x9E\xA1 Full pricelist cek di https://rl.insider.gg";
         break;
