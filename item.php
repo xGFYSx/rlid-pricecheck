@@ -5,9 +5,10 @@
   protected $apikey = 'GxpvmYEDSXPkkQizT0kvnfGiQyyQsBjK';
   protected  $apiUrl = 'https://rl.insider.gg/api/pricebotExternal';
 
-
   public $error = false;
-  public $error_code = '';
+  public $error_msg = '';
+  public $error_code;
+
 
   public $query = '';
   public $platform = 'pc';
@@ -23,7 +24,6 @@
   //response displayText
   public $displayText;
 
-
   //set default platform
   public function __construct(){
 
@@ -31,7 +31,6 @@
         'pc' => array( 'pc', 'steam' ),
         'ps4' => array( 'ps4', 'ps' )
       );
-
   }
 
   /*
@@ -41,7 +40,7 @@
   function setQuery($query)
   {
   	if( strlen($query)<= 7 ){
- 		$this->error(0);
+ 		$this->error_code = 0;
  		return $this;
 	} else {
 	    //remove !price from string
@@ -58,7 +57,6 @@
 	    return $this;
 	}
   }
-
 
   /**
    * setPlatform
@@ -85,7 +83,7 @@
           break;
 
           default:
-            $this->error(1);
+            $this->error_code = 1;
           break;
 
       endswitch;
@@ -137,7 +135,7 @@
       endswitch;
 
       $this->error = true;
-      $this->error_code = $msg;
+      $this->error_msg = $msg;
 
       $this->speech = $msg;
       return $msg;
@@ -152,7 +150,6 @@
       $this->response = $msg;
       return $msg;
   }
-
 
   /**
    * [getPrice API]
@@ -199,7 +196,6 @@
     }
  	}
 
-
   /**
    * makeResponse
    * @return [str]           [formatted str]
@@ -207,11 +203,17 @@
   function _makeResponse()
   {
       $response = $this->response;
+      $error_code = $this->error_code;
 
       //check error
-      if( isset($response->ErrorCode) )
+      if( isset($error_code)
       {
-        //jika multiple items
+      	return $this->error($error_code);
+      }
+
+      if( isset($response->ErrorCode))
+      {
+      	//jika multiple items
         if($response->ErrorCode == '4')
         {
           $err = '';
@@ -226,8 +228,8 @@
             return $this->error( $response->ErrorCode + 1 );
         }
       }
-      else{
-
+      else
+      {
         $cert = FALSE;
         $color = FALSE;
 
