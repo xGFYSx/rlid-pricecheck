@@ -65,20 +65,11 @@ if( $method )
 				break;
 
 			case '!rlid':
-				$text = "\xE2\x9E\xA1 Facebook Page : http://www.facebook.com/RocketLeagueID\n
-						\xE2\x9E\xA1 Grup Steam : http://steamcommunity.com/groups/RLID\n
-						\xE2\x9E\xA1 Instagram : http://www.instagram.com/rocketleague.id\n
-						\xE2\x9E\xA1 Grup Line Square : http://line.me/ti/g2/ICUFW8K9FE\n
-						\xE2\x9E\xA1 Discord : https://discord.gg/Fg7B557";
+				$text = "\xE2\x9E\xA1 Facebook Page : http://www.facebook.com/RocketLeagueID\n\xE2\x9E\xA1 Grup Steam : http://steamcommunity.com/groups/RLID\n\xE2\x9E\xA1 Instagram : http://www.instagram.com/rocketleague.id\n\xE2\x9E\xA1 Grup Line Square : http://line.me/ti/g2/ICUFW8K9FE\n\xE2\x9E\xA1 Discord : https://discord.gg/Fg7B557";
 				break;
 
 			case '!mabar':
-				$text = '\xF0\x9F\x8F\x81 SPARRING/MABAR RLID \xE2\x9A\xBD \xF0\x9F\x8F\x8E\n
-						\xF0\x9F\x98\x86 Ayo ikut sparring/mabar komunitas!\n\n
-						Ikutnya gampang, tinggal join private match dengan format room :\n
-						\xE2\x9E\xA1 name : rlid
-						\xE2\x9E\xA1 password : rlid\n\n
-						\xE2\x9D\x97 Jangan lupa untuk join di voice chat discord di channel "Parkiran"';
+				$text = "\xF0\x9F\x8F\x81 SPARRING/MABAR RLID \xE2\x9A\xBD \xF0\x9F\x8F\x8E\n\xF0\x9F\x98\x86 Ayo ikut sparring/mabar komunitas!\n\nIkutnya gampang, tinggal join private match dengan format room :\n\xE2\x9E\xA1 name : rlid\xE2\x9E\xA1 password : rlid\n\n\xE2\x9D\x97 Jangan lupa untuk join di voice chat discord di channel \"Parkiran\"";
 				break;
 
 			//no response (biar gak duplikat, atau ngulang kalimat kita)
@@ -88,7 +79,6 @@ if( $method )
 		}
 		echo $response->setText($text,$text)->result();
 		die();
-
 }
 else{
 		echo 'Not allowed';
