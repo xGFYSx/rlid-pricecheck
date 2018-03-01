@@ -69,7 +69,7 @@ if( $method )
 				break;
 
 			case '!mabar':
-				$text = "\xF0\x9F\x8F\x81 SPARRING/MABAR RLID \xE2\x9A\xBD \xF0\x9F\x8F\x8E\n\xF0\x9F\x98\x86 Ayo ikut sparring/mabar komunitas!\n\nIkutnya gampang, tinggal join private match dengan format room :\n\xE2\x9E\xA1 name : rlid\xE2\x9E\xA1 password : rlid\n\n\xE2\x9D\x97 Jangan lupa untuk join di voice chat discord di channel \"Parkiran\"";
+				$text = "\xF0\x9F\x8F\x81 SPARRING/MABAR RLID \xE2\x9A\xBD \xF0\x9F\x8F\x8E\n\xF0\x9F\x98\x86 Ayo ikut sparring/mabar komunitas!\n\nIkutnya gampang, tinggal join private match dengan format room :\n\xE2\x9E\xA1 name : rlid\n\xE2\x9E\xA1 password : rlid\n\n\xE2\x9D\x97 Jangan lupa untuk join di voice chat discord di channel \"Parkiran\"";
 				break;
 
 			//no response (biar gak duplikat, atau ngulang kalimat kita)
