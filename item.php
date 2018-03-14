@@ -47,26 +47,22 @@ class Item
      */
     function setQuery($query)
     {
-        if (strpos($query, '!price')) {
-            if (strlen($query) <= 7) {
-                $this->error_code = 0;
-                return $this;
-            } else {
-                //remove !price from string
-                $query = str_replace('!price ', '', $query);
-                
-                //remove platform from string
-                foreach ($this->default_platform as $var) {
-                    foreach ($var as $varr) {
-                        $query = str_replace($varr, '', $query);
-                    }
-                }
-                
-                $this->query = $query;
-                return $this;
-            }
+        if (strlen($query) <= 3) {
+            $this->error_code = 0;
+            return $this;
         } else {
-            die();
+                //remove !price from string
+            $query = str_replace('!price ', '', $query);
+            
+                //remove platform from string
+            foreach ($this->default_platform as $var) {
+                foreach ($var as $varr) {
+                    $query = str_replace($varr, '', $query);
+                }
+            }
+            
+            $this->query = $query;
+            return $this;
         }
     }
     
