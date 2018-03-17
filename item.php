@@ -3,7 +3,7 @@
 class Item
 {
     
-    protected $apikey = 'GxpvmYEDSXPkkQizT0kvnfGiQyyQsBjK';
+    protected $apikey = 'EPZ2nA0DgNxh0JAmMjehCi43zcn995cJ';
     protected $apiUrl = 'https://rl.insider.gg/api/pricebotExternal';
     
     public $error = false;
@@ -47,7 +47,7 @@ class Item
      */
     function setQuery($query)
     {
-        if (strlen($query) <= 3) {
+        if (strlen($query) <= 7) {
             $this->error_code = 0;
             return $this;
         } else {
