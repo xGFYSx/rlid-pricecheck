@@ -48,7 +48,8 @@ class Item
     function setQuery($query)
     {
         if(!strpos('!price',$query)){
-          print_r(strpos('!price',$query));
+          echo $query;
+          var_dump(strpos('!price',$query));
           exit();
         }
 
