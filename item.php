@@ -47,7 +47,7 @@ class Item
      */
     function setQuery($query)
     {
-        if (strlen($query) <= 7) {
+        if (strlen($query) <= 7 && !strpos('!price',$query) ) {
             $this->error_code = 0;
             return $this;
         } else {
