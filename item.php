@@ -47,7 +47,7 @@ class Item
      */
     function setQuery($query)
     {
-        if(!strpos($query,'!price')){
+        if( is_int( strpos($query,'!price') ) == FALSE ){
           exit();
         }
 
