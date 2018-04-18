@@ -72,6 +72,10 @@ if( $method )
 				$text = "\xF0\x9F\x8F\x81 SPARRING/MABAR RLID \xE2\x9A\xBD \xF0\x9F\x8F\x8E\n\xF4\x80\x82\x8D Ayo ikut sparring/mabar komunitas!\n\nIkutnya gampang, tinggal join private match dengan format room :\n\xE2\x9E\xA1 name : rlid\n\xE2\x9E\xA1 password : rlid\n\n\xE2\x9D\x97 Jangan lupa untuk join di voice chat discord di channel \"Parkiran\"";
 				break;
 
+			case '!rewards':
+				$text = "\xE2\x97\xBE Jadwal RLCS\n\xF0\x9F\x8C\x8ENorth America: Minggu, 02.00 WIB\n\xF0\x9F\x8C\x8D Europe: Senin, 00.00 WIB\n\xF0\x9F\x8C\x8FOceania: Minggu, 07.00 WIB\n\xE2\x97\xBE Jadwal RLRS\n\xF0\x9F\x8C\x8D Europe : Sabtu, 00.00 WIB\n\xF0\x9F\x8C\x8ENorth America: Sabtu 06.00 WIB";
+			break;
+
 			//no response (biar gak duplikat, atau ngulang kalimat kita)
 			default:
 				die();
