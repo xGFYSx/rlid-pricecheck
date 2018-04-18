@@ -73,8 +73,8 @@ if( $method )
 				break;
 
 			case '!rewards':
-				$text = "\xE2\x97\xBE Jadwal RLCS\n\xF0\x9F\x8C\x8ENorth America: Minggu, 02.00 WIB\n\xF0\x9F\x8C\x8D Europe: Senin, 00.00 WIB\n\xF0\x9F\x8C\x8FOceania: Minggu, 07.00 WIB\n\xE2\x97\xBE Jadwal RLRS\n\xF0\x9F\x8C\x8D Europe : Sabtu, 00.00 WIB\n\xF0\x9F\x8C\x8ENorth America: Sabtu 06.00 WIB";
-			break;
+				$text = "\xE2\x97\xBE Jadwal RLCS\n\xF0\x9F\x8C\x8ENorth America: Minggu, 02:00 WIB\n\xF0\x9F\x8C\x8D Europe: Senin, 00:00 WIB\n\xF0\x9F\x8C\x8FOceania: Minggu, 07:00 WIB\n\xE2\x97\xBE Jadwal RLRS\n\xF0\x9F\x8C\x8D Europe: Sabtu, 00:00 WIB\n\xF0\x9F\x8C\x8ENorth America: Sabtu 06:00 WIB";
+				break;
 
 			//no response (biar gak duplikat, atau ngulang kalimat kita)
 			default:
