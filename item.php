@@ -61,8 +61,10 @@ class Item
                 //remove platform from string
             foreach ($this->default_platform as $var) {
                 foreach ($var as $varr) {
-                    $query = str_replace($varr, '', $query);
-                    $this->platform = $varr;
+                    if( is_int( strpos($query,$varr) ) == TRUE ){
+                        $query = str_replace($varr, '', $query);
+                        $this->platform = $varr;
+                    }   
                 }
             }
             
