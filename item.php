@@ -62,7 +62,7 @@ class Item
             foreach ($this->default_platform as $var) {
                 foreach ($var as $varr) {
                     $query = str_replace($varr, '', $query);
-                    setPlatform($varr);
+                    $this->setPlatform($varr);
                 }
             }
             
