@@ -62,6 +62,7 @@ class Item
             foreach ($this->default_platform as $var) {
                 foreach ($var as $varr) {
                     $query = str_replace($varr, '', $query);
+                    setPlatform($varr);
                 }
             }
             
@@ -82,15 +83,15 @@ class Item
                 $this->platform = 'pc';
                 break;
             
-            case strtolower('pc'):
+            case 'pc':
                 $this->platform = 'pc';
                 break;
             
-            case strtolower('ps4'):
+            case 'ps4':
                 $this->platform = 'ps4';
                 break;
             
-            case strtolower('ps'):
+            case 'ps':
                 $this->platform = 'ps4';
                 break;
             
