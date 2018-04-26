@@ -74,7 +74,7 @@ class Item
      * setPlatform
      * @param string $platform [pc,ps4]
      */
-    function setPlatform($platform = 'pc')
+    function setPlatform($platform)
     {
         switch ($platform):
             
