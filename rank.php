@@ -164,7 +164,7 @@ class Rank
         $err = curl_error($curl);
         curl_close($curl);
 
-        echo var_dump(json_decode($response));
+        echo var_dump($user);
         die();
 
         return $this->response = json_decode($response);
