@@ -6,7 +6,6 @@ class Rank
     public $error_msg = '';
     public $error_code;
     
-    
     public $query = '';
     public $platform = 'pc';
     
@@ -64,11 +63,7 @@ class Rank
             return $this;
         }
     }
-    
-    /**
-     * setPlatform
-     * @param string $platform [pc,ps4]
-     */
+ 
     function setPlatform($platform)
     {
         switch ($platform):
@@ -98,11 +93,6 @@ class Rank
         return $this;
     }
     
-    /**
-     * error (define error message)
-     * @param  [int] $code [description]
-     * @return [type]       [description]
-     */
     function error($code, $external_msg = '')
     {
         switch ($code):
@@ -186,11 +176,7 @@ class Rank
             return $this->_makeResponse($response);
         }
     }
-    
-    /**
-     * makeResponse
-     * @return [str]           [formatted str]
-     */
+
     function _makeResponse()
     {
         $response   = $this->response;
@@ -211,9 +197,7 @@ class Rank
         }
             return $result;
         }
-        
     }
-    
 }
 
 ?>
