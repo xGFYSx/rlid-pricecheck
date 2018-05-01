@@ -6,6 +6,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 //include file
 include_once dirname(__FILE__) .DIRECTORY_SEPARATOR. 'response.php' ;
 include_once dirname(__FILE__) .DIRECTORY_SEPARATOR. 'item.php' ;
+include_once dirname(__FILE__) .DIRECTORY_SEPARATOR. 'rank.php' ;
 
 $response = new ResponseMsg;
 
