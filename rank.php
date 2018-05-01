@@ -1,11 +1,7 @@
 <?php
 
-class Item
+class Rank
 {
-    
-    protected $apikey = 'EPZ2nA0DgNxh0JAmMjehCi43zcn995cJ';
-    protected $apiUrl = 'https://rl.insider.gg/api/pricebotExternal';
-    
     public $error = false;
     public $error_msg = '';
     public $error_code;
@@ -40,23 +36,19 @@ class Item
             )
         );
     }
-    
-    /*
-     * [setQuery]
-     * @param [array] $paint [description]
-     */
+
     function setQuery($query)
     {
-        if( is_int( strpos($query,'!price') ) == FALSE ){
+        if( is_int( strpos($query,'!rank') ) == FALSE ){
           exit();
         }
 
-        if (strlen($query) <= 7 ) {
+        if (strlen($query) <= 6 ) {
             $this->error_code = 0;
             return $this;
         } else {
                 //remove !price from string
-            $query = str_replace('!price ', '', $query);
+            $query = str_replace('!rank ', '', $query);
             
                 //remove platform from string
             foreach ($this->default_platform as $var) {
@@ -156,44 +148,28 @@ class Item
         return $msg;
     }
     
-    /**
-     * [result description]
-     * @param  [type] $msg [description]
-     * @return [type]      [description]
-     */
     function result($msg)
     {
         $this->response = $msg;
         return $msg;
     }
     
-    /**
-     * [getPrice API]
-     * https://rl.insider.gg/api/pricebotExternal
-     * @param  [type] $item     [paint+item name] ex: "white zomba"
-     * @param  [type] $platform [pc,ps4]
-     * @return [str]           [displayText]
-     */
-    
-    function getPrice()
+    function getID($user)
     {
-        $data = array(
-            'platform' => $this->platform,
-            'item' => $this->query
-        );
+        $url = "http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/"; 
+        $key = "A1726D6D29818079F171D8F78AECDA88"
         
         $curl = curl_init();
         
-        //set curl option
         curl_setopt_array($curl, array(
-            CURLOPT_URL => $this->apiUrl,
+            CURLOPT_URL => $resolveUrl,
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => json_encode($data),
-            CURLOPT_HTTPHEADER => array(
-                "x-api-key: " . $this->apikey
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_POSTFIELDS => array(
+                "key" => $key,
+                "vanityurl" => $user
             ),
             CURLOPT_RETURNTRANSFER => TRUE
         ));
@@ -220,56 +196,19 @@ class Item
         $response   = $this->response;
         $error_code = $this->error_code;
         
-        //check error
-        if (isset($error_code)) {
-            return $this->error($error_code);
-        }
-        
-        if (isset($response->ErrorCode)) {
-            //jika multiple items
-            if ($response->ErrorCode == '4') {
-                $err = '';
-                foreach ($response->Matches as $val) {
-                    $err .= "$val \n";
-                }
-                return $this->error(5, $err);
-            } else //error yg lain
-                {
-                return $this->error($response->ErrorCode + 1);
-            }
+        // //check error
+        // if (isset($error_code)) {
+        //     return $this->error($error_code);
+        // }
+
+        //Generate text
+        $result = '';
+
+        if($response->success == '1'){
+            $result .= "\xE2\x9E\xA1 Steam ID : " . $response->steamid;
         } else {
-            $cert  = FALSE;
-            $color = FALSE;
-            
-            //check  cert
-            if (isset($response->Cert) && $response->Cert != 'false') {
-                $cert = $response->Cert;
-            }
-            
-            //check color
-            if (isset($response->PaintName) && strtolower($response->PaintName) != 'default') {
-                $color = $response->PaintName;
-            }
-            
-            //generate displayText
-            $result = '';
-            
-            if ($cert != FALSE) {
-                $result .= "$cert  ";
-            }
-            
-            $result .= "\xE2\x9E\xA1 ";
-            
-            //add color before item name
-            if ($color != FALSE) {
-                $result .= "$color ";
-            }
-            $result .= "$response->ItemName \n";
-            
-            $result .= "\xF0\x9F\x8E\xAE Platform : " . strtoupper($this->platform) . " \n";
-            $result .= "\xF0\x9F\x94\x91 Price : $response->Price \n";
-            $result .= "\xF0\x9F\x8C\x90 $response->URL \n";
-            
+            $result .= "\xE2\x9A\xA0 ID tidak ditemukan";
+        }
             return $result;
         }
         
