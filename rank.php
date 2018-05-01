@@ -93,50 +93,50 @@ class Rank
         return $this;
     }
     
-    function error($code, $external_msg = '')
-    {
-        switch ($code):
+    // function error($code, $external_msg = '')
+    // {
+    //     switch ($code):
             
-            case 0:
-                $msg = "\xE2\x9A\xA0 Nama itemnya diisi dulu gan\n\xE2\x9E\xA1 Full pricelist cek di https://rl.insider.gg";
-                break;
+    //         case 0:
+    //             $msg = "\xE2\x9A\xA0 Nama itemnya diisi dulu gan\n\xE2\x9E\xA1 Full pricelist cek di https://rl.insider.gg";
+    //             break;
             
-            case 1:
-                $msg = "\xE2\x9A\xA0 Platform yang tersedia hanya PC dan PS4\n\xE2\x9E\xA1 Full pricelist cek di https://rl.insider.gg";
-                break;
+    //         case 1:
+    //             $msg = "\xE2\x9A\xA0 Platform yang tersedia hanya PC dan PS4\n\xE2\x9E\xA1 Full pricelist cek di https://rl.insider.gg";
+    //             break;
             
-            case 2:
-                $msg = "\xE2\x9A\xA0 Item ini tidak ada di platform " . strtoupper($this->platform) . "\n\xE2\x9E\xA1 Full pricelist cek di https://rl.insider.gg";
-                break;
+    //         case 2:
+    //             $msg = "\xE2\x9A\xA0 Item ini tidak ada di platform " . strtoupper($this->platform) . "\n\xE2\x9E\xA1 Full pricelist cek di https://rl.insider.gg";
+    //             break;
             
-            case 3:
-                $msg = "\xE2\x9A\xA0 " . $this->response->ItemName . " tidak ada dalam warna " . $this->response->PaintName . "\n\xE2\x9E\xA1 Full pricelist cek di https://rl.insider.gg";
-                break;
+    //         case 3:
+    //             $msg = "\xE2\x9A\xA0 " . $this->response->ItemName . " tidak ada dalam warna " . $this->response->PaintName . "\n\xE2\x9E\xA1 Full pricelist cek di https://rl.insider.gg";
+    //             break;
             
-            case 4:
-                $msg = "\xE2\x9A\xA0 Belum ada harga untuk item ini \n\xE2\x9E\xA1 Full pricelist cek di https://rl.insider.gg";
-                break;
+    //         case 4:
+    //             $msg = "\xE2\x9A\xA0 Belum ada harga untuk item ini \n\xE2\x9E\xA1 Full pricelist cek di https://rl.insider.gg";
+    //             break;
             
-            case 5:
-                $msg = "\xE2\x9D\x93 Apakah anda mencari item ini?\n\n";
-                $msg .= $external_msg;
-                $msg .= "\n\xE2\x9E\xA1 Full pricelist cek di https://rl.insider.gg";
-                break;
+    //         case 5:
+    //             $msg = "\xE2\x9D\x93 Apakah anda mencari item ini?\n\n";
+    //             $msg .= $external_msg;
+    //             $msg .= "\n\xE2\x9E\xA1 Full pricelist cek di https://rl.insider.gg";
+    //             break;
             
             
-            default:
-                //return the text
-                $msg = $code;
-                break;
+    //         default:
+    //             //return the text
+    //             $msg = $code;
+    //             break;
                 
-        endswitch;
+    //     endswitch;
         
-        $this->error     = true;
-        $this->error_msg = $msg;
+    //     $this->error     = true;
+    //     $this->error_msg = $msg;
         
-        $this->speech = $msg;
-        return $msg;
-    }
+    //     $this->speech = $msg;
+    //     return $msg;
+    // }
     
     function result($msg)
     {
@@ -146,26 +146,22 @@ class Rank
     
     function getID($user)
     {
-        $url = "http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/"; 
-        $key = "A1726D6D29818079F171D8F78AECDA88"
-        
+        $key = "A1726D6D29818079F171D8F78AECDA88";
         $curl = curl_init();
-        
+
         curl_setopt_array($curl, array(
-            CURLOPT_URL => $resolveUrl,
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_POSTFIELDS => array(
-                "key" => $key,
-                "vanityurl" => $user
-            ),
-            CURLOPT_RETURNTRANSFER => TRUE
+          CURLOPT_URL => "http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=$key&vanityurl=$user",
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => "",
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 30,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => "GET"
         ));
+
         $response = curl_exec($curl);
-        $err      = curl_error($curl);
-        
+        $err = curl_error($curl);
+
         curl_close($curl);
         $this->response = json_decode($response);
         
