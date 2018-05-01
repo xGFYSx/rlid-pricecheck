@@ -164,7 +164,7 @@ class Rank
         $response = curl_exec($curl);
         $err = curl_error($curl);
         curl_close($curl);
-        $temp = json_decode($response)
+        $temp = json_decode($response);
         $this->response = $temp->response;
 
         if ($err) {
@@ -187,7 +187,7 @@ class Rank
 
         // Generate text
         $result = '';
-        if((isset($response->success)) && ($response->success == 1){
+        if($response->success == 1){
             $result .= "\xE2\x9E\xA1 Steam ID : " . $response->steamid;
         } else {
             $result .= "\xE2\x9A\xA0 ID tidak ditemukan";
