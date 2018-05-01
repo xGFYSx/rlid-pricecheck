@@ -144,9 +144,10 @@ class Rank
         return $msg;
     }
     
-    function getID($user)
+    function getID()
     {
         $key = "A1726D6D29818079F171D8F78AECDA88";
+        $user = $this->query;
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
