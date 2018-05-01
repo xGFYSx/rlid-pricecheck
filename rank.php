@@ -183,7 +183,7 @@ class Rank
         // if (isset($error_code)) {
         //     return $this->error($error_code);
         // }
-        Generate text
+        // Generate text
         $result = '';
 
         if($response->success == '1'){
