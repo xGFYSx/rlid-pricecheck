@@ -163,15 +163,18 @@ class Rank
         $response = curl_exec($curl);
         $err = curl_error($curl);
 
-        curl_close($curl);
-        $this->response = json_decode($response);
+        echo var_dump($response);
+        die();
+
+        // curl_close($curl);
+        // $this->response = json_decode($response);
         
-        if ($err) {
-            $this->error($err);
-        } else {
-            // return $response;
-            return $this->_makeResponse($response);
-        }
+        // if ($err) {
+        //     $this->error($err);
+        // } else {
+        //     // return $response;
+        //     return $this->_makeResponse($response);
+        // }
     }
 
     function _makeResponse()
@@ -183,9 +186,6 @@ class Rank
         // if (isset($error_code)) {
         //     return $this->error($error_code);
         // }
-
-        echo var_dump($response);
-        die();
         //Generate text
         // $result = '';
 
