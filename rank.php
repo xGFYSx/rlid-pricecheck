@@ -53,8 +53,9 @@ class Rank
             foreach ($this->default_platform as $var) {
                 foreach ($var as $varr) {
                     if( is_int( strpos($query,$varr) ) == TRUE ){
-                        $query = str_replace($varr, '', $query);
                         $this->platform = $varr;
+                        $varr .= " ";
+                        $query = str_replace($varr, '', $query);
                     }   
                 }
             }
@@ -164,7 +165,7 @@ class Rank
         $err = curl_error($curl);
         curl_close($curl);
 
-        echo var_dump($user);
+        echo var_dump(json_decode($response));
         die();
 
         return $this->response = json_decode($response);
