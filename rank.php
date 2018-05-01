@@ -184,15 +184,17 @@ class Rank
         //     return $this->error($error_code);
         // }
 
+        echo var_dump($response);
+        die();
         //Generate text
-        $result = '';
+        // $result = '';
 
-        if($response->success == '1'){
-            $result .= "\xE2\x9E\xA1 Steam ID : " . $response->steamid;
-        } else {
-            $result .= "\xE2\x9A\xA0 ID tidak ditemukan";
-        }
-            return $result;
+        // if($response->success == '1'){
+        //     $result .= "\xE2\x9E\xA1 Steam ID : " . $response->steamid;
+        // } else {
+        //     $result .= "\xE2\x9A\xA0 ID tidak ditemukan";
+        // }
+        //     return $result;
     }
 }
 
