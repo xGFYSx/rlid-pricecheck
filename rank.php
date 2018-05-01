@@ -179,7 +179,7 @@ class Rank
         $response   = $this->response;
         $error_code = $this->error_code;
 
-        echo var_dump($response->success);
+        echo var_dump($response);
         die();
 
         if(isset($response->success)){
