@@ -54,8 +54,8 @@ if( $method )
 					case 'checkrank':
 						$rank = new Rank;
 						$result = $rank->setQuery($json->result->resolvedQuery)
-														->setPlatform($item->platform)
-														->getRank();
+														->setPlatform($rank->platform)
+														->getID();
 
 						echo $response->setText( $result ,$result)->result();
 						die();
