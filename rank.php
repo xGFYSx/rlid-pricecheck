@@ -164,17 +164,14 @@ class Rank
         $response = curl_exec($curl);
         $err = curl_error($curl);
         curl_close($curl);
+        $this->response = json_decode($response);
 
-        echo var_dump(json_decode($response));
-        die();
-
-        return $this->response = json_decode($response);
-        // if ($err) {
-        //     $this->error($err);
-        // } else {
-        //     // return $response;
-        //     return $this->_makeResponse($response);
-        // }
+        if ($err) {
+            $this->error($err);
+        } else {
+            // return $response;
+            return $this->_makeResponse($response);
+        }
     }
 
     function _makeResponse()
@@ -186,8 +183,8 @@ class Rank
         // if (isset($error_code)) {
         //     return $this->error($error_code);
         // }
-        //Generate text
-        // $result = '';
+        Generate text
+        $result = '';
 
         if($response->success == '1'){
             $result .= "\xE2\x9E\xA1 Steam ID : " . $response->steamid;
