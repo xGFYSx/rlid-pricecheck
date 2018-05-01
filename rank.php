@@ -178,15 +178,19 @@ class Rank
     {
         $response   = $this->response;
         $error_code = $this->error_code;
+
+        if(isset($response->success)){
+            $success = $response->success;
+        }
         
         // //check error
         // if (isset($error_code)) {
         //     return $this->error($error_code);
         // }
+        
         // Generate text
         $result = '';
-
-        if($response->success == 1){
+        if($success == 1){
             $result .= "\xE2\x9E\xA1 Steam ID : " . $response->steamid;
         } else {
             $result .= "\xE2\x9A\xA0 ID tidak ditemukan";
