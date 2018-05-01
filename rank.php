@@ -162,13 +162,12 @@ class Rank
 
         $response = curl_exec($curl);
         $err = curl_error($curl);
-
-        echo var_dump($response);
+        curl_close($curl);
+        
+        echo_var_dump(json_decode($response));
         die();
 
-        // curl_close($curl);
-        // $this->response = json_decode($response);
-        
+        return $this->response = json_decode($response);
         // if ($err) {
         //     $this->error($err);
         // } else {
@@ -189,12 +188,12 @@ class Rank
         //Generate text
         // $result = '';
 
-        // if($response->success == '1'){
-        //     $result .= "\xE2\x9E\xA1 Steam ID : " . $response->steamid;
-        // } else {
-        //     $result .= "\xE2\x9A\xA0 ID tidak ditemukan";
-        // }
-        //     return $result;
+        if($response->success == '1'){
+            $result .= "\xE2\x9E\xA1 Steam ID : " . $response->steamid;
+        } else {
+            $result .= "\xE2\x9A\xA0 ID tidak ditemukan";
+        }
+            return $result;
     }
 }
 
