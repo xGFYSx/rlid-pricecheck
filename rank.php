@@ -192,7 +192,6 @@ class Rank
             $result .= "\xE2\x9A\xA0 ID tidak ditemukan";
         }
             return $result;
-        }
     }
 }
 
