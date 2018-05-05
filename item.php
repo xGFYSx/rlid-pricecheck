@@ -3,7 +3,7 @@
 class Item
 {
     
-    protected $apikey = 'EPZ2nA0DgNxh0JAmMjehCi43zcn995cJ';
+    protected $apikey = '6RpMq16EGC2G0di8utJy2A1iIzW2de9F';
     protected $apiUrl = 'https://rl.insider.gg/api/pricebotExternal';
     
     public $error = false;
