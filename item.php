@@ -41,10 +41,6 @@ class Item
         );
     }
     
-    /*
-     * [setQuery]
-     * @param [array] $paint [description]
-     */
     function setQuery($query)
     {
         if( is_int( strpos($query,'!price') ) == FALSE ){
@@ -72,15 +68,11 @@ class Item
             return $this;
         }
     }
-    
-    /**
-     * setPlatform
-     * @param string $platform [pc,ps4]
-     */
-    function setPlatform($platform)
+
+    function setPlatform()
     {
-        switch ($platform):
-            
+        switch ($this->platform):
+
             case '':
                 $this->platform = 'pc';
                 break;
@@ -106,11 +98,6 @@ class Item
         return $this;
     }
     
-    /**
-     * error (define error message)
-     * @param  [int] $code [description]
-     * @return [type]       [description]
-     */
     function error($code, $external_msg = '')
     {
         switch ($code):
@@ -155,26 +142,13 @@ class Item
         $this->speech = $msg;
         return $msg;
     }
-    
-    /**
-     * [result description]
-     * @param  [type] $msg [description]
-     * @return [type]      [description]
-     */
+
     function result($msg)
     {
         $this->response = $msg;
         return $msg;
     }
-    
-    /**
-     * [getPrice API]
-     * https://rl.insider.gg/api/pricebotExternal
-     * @param  [type] $item     [paint+item name] ex: "white zomba"
-     * @param  [type] $platform [pc,ps4]
-     * @return [str]           [displayText]
-     */
-    
+
     function getPrice()
     {
         $data = array(
@@ -210,11 +184,7 @@ class Item
             return $this->_makeResponse($response);
         }
     }
-    
-    /**
-     * makeResponse
-     * @return [str]           [formatted str]
-     */
+
     function _makeResponse()
     {
         $response   = $this->response;
@@ -272,9 +242,6 @@ class Item
             
             return $result;
         }
-        
     }
-    
 }
-
 ?>
