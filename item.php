@@ -12,7 +12,7 @@ class Item
     
     
     public $query = '';
-    public $platform = 'pc';
+    public $platform = '';
     
     public $default_platform;
     
