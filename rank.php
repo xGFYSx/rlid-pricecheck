@@ -198,8 +198,6 @@ class Rank
             $this->error_code = 3;
         }
 
-        if()
-
         if ($err) {
             $this->error($err);
         } else {
