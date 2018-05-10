@@ -45,8 +45,6 @@ if( $method )
 						$result = $item->setQuery($json->result->resolvedQuery)
 														->setPlatform()
 														->getPrice();
-
-						// echo $response->setText($item->speech,$result)->result();
 						echo $response->setText( $result ,$result)->result();
 						die();
 					break;
@@ -55,14 +53,12 @@ if( $method )
 						$rank = new Rank;
 						$result = $rank->setQuery($json->result->resolvedQuery)
 														->setPlatform($rank->platform)
-														->getID();
-
+														->getRank();
 						echo $response->setText( $result ,$result)->result();
 						die();
 					break;
 			endswitch;
 		}
-
 
 		//normal response
 		switch($text) {

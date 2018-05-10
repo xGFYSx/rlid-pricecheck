@@ -10,7 +10,6 @@ class Item
     public $error_msg = '';
     public $error_code;
     
-    
     public $query = '';
     public $platform = '';
     

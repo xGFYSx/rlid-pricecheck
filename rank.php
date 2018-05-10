@@ -2,6 +2,11 @@
 
 class Rank
 {
+    protected $apiKey = 'Z9VO8OQFV80MKCMBV7VJ23V3WTRO2UYU';
+
+    public $currentSeason = 7;
+    public $tierList = array("Unranked", "Bronze I", "Bronze II", "Bronze III", "Silver I", "Silver II", "Silver III", "Gold I", "Gold II", "Gold III", "Platinum I", "Platinum II", "Platinum III", "Diamond I", "Diamond II", "Diamond III", "Champion I", "Champion II", "Champion III", "Grand Champion");
+
     public $error = false;
     public $error_msg = '';
     public $error_code;
@@ -70,23 +75,23 @@ class Rank
         switch ($platform):
             
             case '':
-                $this->platform = 'pc';
+                $this->error_code = 1;
                 break;
             
             case 'pc':
-                $this->platform = 'pc';
+                $this->platform = '1';
                 break;
             
             case 'ps4':
-                $this->platform = 'ps4';
+                $this->platform = '2';
                 break;
             
             case 'ps':
-                $this->platform = 'ps4';
+                $this->platform = '2';
                 break;
             
             default:
-                $this->error_code = 1;
+                $this->error_code = 2;
                 break;
                 
         endswitch;
@@ -94,78 +99,106 @@ class Rank
         return $this;
     }
     
-    // function error($code, $external_msg = '')
-    // {
-    //     switch ($code):
+    function error($code, $external_msg = '')
+    {
+        switch ($code):
             
-    //         case 0:
-    //             $msg = "\xE2\x9A\xA0 Nama itemnya diisi dulu gan\n\xE2\x9E\xA1 Full pricelist cek di https://rl.insider.gg";
-    //             break;
+            case 0:
+                $msg = "\xE2\x9A\xA0 Usernamenya diisi dulu gan.";
+                break;
             
-    //         case 1:
-    //             $msg = "\xE2\x9A\xA0 Platform yang tersedia hanya PC dan PS4\n\xE2\x9E\xA1 Full pricelist cek di https://rl.insider.gg";
-    //             break;
+            case 1:
+                $msg = "\xE2\x9A\xA0 Platformnya diisi dulu gan (PC/PS4).";
+                break;
+
+            case 2:
+                $msg = "\xE2\x9A\xA0 Platform yang tersedia hanya PC dan PS4.";
+                break;
             
-    //         case 2:
-    //             $msg = "\xE2\x9A\xA0 Item ini tidak ada di platform " . strtoupper($this->platform) . "\n\xE2\x9E\xA1 Full pricelist cek di https://rl.insider.gg";
-    //             break;
+            case 3:
+                $msg = "\xE2\x9A\xA0 Usernamenya gak ketemu gan.";
+                break;
             
-    //         case 3:
-    //             $msg = "\xE2\x9A\xA0 " . $this->response->ItemName . " tidak ada dalam warna " . $this->response->PaintName . "\n\xE2\x9E\xA1 Full pricelist cek di https://rl.insider.gg";
-    //             break;
-            
-    //         case 4:
-    //             $msg = "\xE2\x9A\xA0 Belum ada harga untuk item ini \n\xE2\x9E\xA1 Full pricelist cek di https://rl.insider.gg";
-    //             break;
-            
-    //         case 5:
-    //             $msg = "\xE2\x9D\x93 Apakah anda mencari item ini?\n\n";
-    //             $msg .= $external_msg;
-    //             $msg .= "\n\xE2\x9E\xA1 Full pricelist cek di https://rl.insider.gg";
-    //             break;
-            
-            
-    //         default:
-    //             //return the text
-    //             $msg = $code;
-    //             break;
+            default:
+                //return the text
+                $msg = $code;
+                break;
                 
-    //     endswitch;
+        endswitch;
         
-    //     $this->error     = true;
-    //     $this->error_msg = $msg;
+        $this->error     = true;
+        $this->error_msg = $msg;
         
-    //     $this->speech = $msg;
-    //     return $msg;
-    // }
+        $this->speech = $msg;
+        return $msg;
+    }
     
     function result($msg)
     {
         $this->response = $msg;
         return $msg;
     }
-    
-    function getID()
+
+    function getMMR($playlistID)
     {
-        $key = "A1726D6D29818079F171D8F78AECDA88";
+        $response = $this->response;
+        $point = $response->rankedSeasons->$currentSeason->$playlistID->rankPoints;
+        $tierID = $response->rankedSeasons->$currentSeason->$playlistID->tier;
+        $tier = $tierList[$tierID];
+        $div = $response->rankedSeasons->$currentSeason->$playlistID->division;
+        $mmr = '';
+        switch ($playlistID) {
+            case '10':
+            $mmr .= "\xE2\x97\xBE Duel (1v1) : $point ($tier Div $div)\n";
+                break;
+            
+            case '11'
+            $mmr .= "\xE2\x97\xBE Doubles (2v2) : $point ($tier Div $div)\n";
+                break;
+
+            case '12'
+            $mmr .= "\xE2\x97\xBE Solo Standard (3v3) : $point ($tier Div $div)\n";
+                break;
+
+            case '13'
+            $mmr .= "\xE2\x97\xBE Standard (3v3) : $point ($tier Div $div)\n";
+                break;
+        }
+
+        return $mmr;
+    }
+
+    function getRank()
+    {
+        $key = $this->apiKey;
+        $platform = $this->platform;
         $user = $this->query;
+
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-          CURLOPT_URL => "http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=$key&vanityurl=$user",
+          CURLOPT_URL => "https://api.rocketleaguestats.com/v1/player?platform_id=$platform&unique_id=$user",
           CURLOPT_RETURNTRANSFER => true,
           CURLOPT_ENCODING => "",
           CURLOPT_MAXREDIRS => 10,
           CURLOPT_TIMEOUT => 30,
           CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => "GET"
+          CURLOPT_CUSTOMREQUEST => "GET",
+          CURLOPT_HTTPHEADER => array(
+            "authorization: $key",
+          ),
         ));
 
         $response = curl_exec($curl);
         $err = curl_error($curl);
         curl_close($curl);
-        $temp = json_decode($response);
-        $this->response = $temp->response;
+        $temp =  json_decode($response);
+
+        if(isset($temp->code) && ($temp->code == "404")){
+            $this->error_code = 3;
+        }
+
+        if()
 
         if ($err) {
             $this->error($err);
@@ -179,18 +212,21 @@ class Rank
     {
         $response   = $this->response;
         $error_code = $this->error_code;
+
         
-        // //check error
-        // if (isset($error_code)) {
-        //     return $this->error($error_code);
-        // }
+        //check error
+        if (isset($error_code)) {
+            return $this->error($error_code);
+        }
 
         // Generate text
+
         $result = '';
-        if($response->success == 1){
-            $result .= "\xE2\x9E\xA1 Steam ID : " . $response->steamid;
-        } else {
-            $result .= "\xE2\x9A\xA0 ID tidak ditemukan";
+        $result .= "\xF0\x9F\x98\xB6 Nama Player : $response->displayName \n";
+        $result .= "\xF0\x9F\x8E\xAE Platform : " . strtoupper($response->platform->name) . " \n";
+        $result .= "\xF0\x9F\x93\x8A Ranked MMR:\n";
+        foreach ($response->rankedSeasons->$currentSeason as $playlist)
+            $result .= getMMR($playlist);
         }
             return $result;
     }
