@@ -224,8 +224,8 @@ class Rank
 
         // Generate text
         $result = '';
-        $result .= "\xF0\x9F\x98\xB6 Nama Player: $response->displayName \n";
-        $result .= "\xF0\x9F\x8E\xAE Platform: $response->platform->name\n";
+        $result .= "\xF0\x9F\x98\xB6 Nama Player: $response->displayName\n";
+        $result .= "\xF0\x9F\x8E\xAE Platform: ".$response->platform->name."\n";
         $result .= "\xF0\x9F\x93\x8A Ranked MMR:\n";
         foreach ($response->rankedSeasons->{$i} as $playlistID => $playlist) {
             $result .= $this->getMMR($playlistID, $playlist);
