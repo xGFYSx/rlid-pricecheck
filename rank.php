@@ -152,19 +152,19 @@ class Rank
 
             switch ($playlistID) {
                 case '10':
-                $mmr .= "\t\xE2\x96\xAA Duel (1v1)\t: $point - $tier Div $div\n";
+                $mmr .= "\t\t\xE2\x96\xAA Duel (1v1)\t: $point - $tier Div $div\n";
                     break;
                 
                 case '11':
-                $mmr .= "\t\xE2\x96\xAA Doubles (2v2)\t: $point - $tier Div $div\n";
+                $mmr .= "\t\t\xE2\x96\xAA Doubles (2v2)\t: $point - $tier Div $div\n";
                     break;
 
                 case '12':
-                $mmr .= "\t\xE2\x96\xAA Solo Standard (3v3)\t: $point - $tier Div $div\n";
+                $mmr .= "\t\t\xE2\x96\xAA Solo Standard (3v3)\t: $point - $tier Div $div\n";
                     break;
 
                 case '13':
-                $mmr .= "\t\xE2\x96\xAA Standard (3v3)\t: $point - $tier Div $div\n";
+                $mmr .= "\t\t\xE2\x96\xAA Standard (3v3)\t: $point - $tier Div $div\n";
                     break;
             }
             return $mmr;
@@ -224,8 +224,8 @@ class Rank
 
         // Generate text
         $result = '';
-        $result .= "\xF0\x9F\x98\xB6 Nama Player : $response->displayName \n";
-        $result .= "\xF0\x9F\x8E\xAE Platform : " . strtoupper($response->platform->name) . " \n";
+        $result .= "\xF0\x9F\x98\xB6 Nama Player: $response->displayName \n";
+        $result .= "\xF0\x9F\x8E\xAE Platform: $response->platform->name\n";
         $result .= "\xF0\x9F\x93\x8A Ranked MMR:\n";
         foreach ($response->rankedSeasons->{$i} as $playlistID => $playlist) {
             $result .= $this->getMMR($playlistID, $playlist);
