@@ -164,6 +164,9 @@ class Rank
                 break;
         }
 
+        echo var_dump($mmr);
+        die();
+
         return $mmr;
     }
 
