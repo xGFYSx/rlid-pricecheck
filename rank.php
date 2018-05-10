@@ -143,7 +143,7 @@ class Rank
     {
         $point = $playlist->rankPoints;
         $tierID = $playlist->tier;
-        $tier = $tierList[$tierID];
+        $tier = $this->$tierList[$tierID];
         $div = $playlist->division;
         $mmr = '';
         switch ($playlist) {
