@@ -206,12 +206,10 @@ class Rank
         }
     }
 
-    function _makeResponse()
+    function _makeResponse($response)
     {
-        $response   = $this->response;
         $error_code = $this->error_code;
 
-        
         //check error
         if (isset($error_code)) {
             return $this->error($error_code);
