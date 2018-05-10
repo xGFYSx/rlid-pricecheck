@@ -141,11 +141,13 @@ class Rank
 
     function getMMR($playlistID)
     {
+        $i = '$currentSeason';
+        $j = '$playlistID';
         $response = $this->response;
-        $point = $response->rankedSeasons->{'$currentSeason'}->{'$playlistID'}->rankPoints;
-        $tierID = $response->rankedSeasons->{'$currentSeason'}->{'$playlistID'}->tier;
+        $point = $response->rankedSeasons->{$i}->{$j}->rankPoints;
+        $tierID = $response->rankedSeasons->{$i}->{$j}->tier;
         $tier = $tierList[$tierID];
-        $div = $response->rankedSeasons->{'$currentSeason'}->{'$playlistID'}->division;
+        $div = $response->rankedSeasons->{$i}->{$j}->division;
         $mmr = '';
         switch ($playlistID) {
             case '10':
@@ -210,6 +212,7 @@ class Rank
 
     function _makeResponse()
     {
+        $i = '$currentSeason';
         $response = $this->response;
         $error_code = $this->error_code;
 
@@ -223,7 +226,7 @@ class Rank
         $result .= "\xF0\x9F\x98\xB6 Nama Player : $response->displayName \n";
         $result .= "\xF0\x9F\x8E\xAE Platform : " . strtoupper($response->platform->name) . " \n";
         $result .= "\xF0\x9F\x93\x8A Ranked MMR:\n";
-        foreach ($response->rankedSeasons->{'$currentSeason'} as $playlist) {
+        foreach ($response->rankedSeasons->{$i} as $playlist) {
             $result .= getMMR($playlist);
         }
             return $result;
