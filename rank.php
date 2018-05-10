@@ -141,9 +141,6 @@ class Rank
 
     function getMMR($playlistID, $playlist)
     {
-        echo var_dump($playlist);
-        die();
-
         $point = $playlist->rankPoints;
         $tierID = $playlist->tier;
         $tier = $this->tierList[$tierID];
