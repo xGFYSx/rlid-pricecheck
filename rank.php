@@ -142,13 +142,14 @@ class Rank
     function getMMR($playlistID, $playlist)
     {
         $mmr = '';
+        $div = 1;
         $point = $playlist->rankPoints;
         $tierID = $playlist->tier;
         if ($tierID == 0) {
             return $mmr;
         } else {
             $tier = $this->tierList[$tierID];
-            $div = $playlist->division;
+            $div += $playlist->division;
 
             switch ($playlistID) {
                 case '10':
