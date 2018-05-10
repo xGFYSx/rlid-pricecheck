@@ -198,6 +198,8 @@ class Rank
             $this->error_code = 3;
         }
 
+        $this->response = $temp;
+
         if ($err) {
             $this->error($err);
         } else {
@@ -206,7 +208,7 @@ class Rank
         }
     }
 
-    function _makeResponse($response)
+    function _makeResponse()
     {
         $error_code = $this->error_code;
 
