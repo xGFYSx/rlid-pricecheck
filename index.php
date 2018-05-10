@@ -62,26 +62,6 @@ if( $method )
 
 		//normal response
 		switch($text) {
-			case '!credit':
-				$text = "All prices courtesy of https://rl.insider.gg\nSpecial thanks to:\n \xE2\x97\xBE Ruffe - Ananta Rizki F. (Mastermind) \n \xE2\x97\xBE xGFYSx - Dewantara Tirta (Programmer)\n \xE2\x97\xBE FRDS  - Agung Firdaus (Assistant Programmer)\n \xE2\x97\xBE Yggdrasil128 and colleagues (Devs at RL Insider)";
-				break;
-
-			case '!help':
-				$text = "\xE2\x9D\x97 Daftar perintah :\n \xE2\x97\xBE !help - Menampilkan pesan panduan\n \xE2\x97\xBE !price <nama item> <warna (optional)> <platform> - Mengecek harga item\n \xE2\x97\xBE !credit - Menampilkan pesan credit";
-				break;
-
-			case '!rlid':
-				$text = "\xE2\x9E\xA1 Facebook Page : http://www.facebook.com/RocketLeagueID\n\xE2\x9E\xA1 Grup Steam : http://steamcommunity.com/groups/RLID\n\xE2\x9E\xA1 Instagram : http://www.instagram.com/rocketleague.id\n\xE2\x9E\xA1 Grup Line Square : http://line.me/ti/g2/ICUFW8K9FE\n\xE2\x9E\xA1 Discord : https://discord.gg/Fg7B557";
-				break;
-
-			case '!mabar':
-				$text = "\xF0\x9F\x8F\x81 SPARRING/MABAR RLID \xE2\x9A\xBD \xF0\x9F\x8F\x8E\n\xF4\x80\x82\x8D Ayo ikut sparring/mabar komunitas!\n\nIkutnya gampang, tinggal join private match dengan format room :\n\xE2\x9E\xA1 name : rlid\n\xE2\x9E\xA1 password : rlid\n\n\xE2\x9D\x97 Jangan lupa untuk join di voice chat discord di channel \"Parkiran\"";
-				break;
-
-			case '!rewards':
-				$text = "\xE2\x97\xBE Jadwal RLCS\n\xF0\x9F\x8C\x8ENorth America: Minggu, 02:00 WIB\n\xF0\x9F\x8C\x8D Europe: Senin, 00:00 WIB\n\xF0\x9F\x8C\x8FOceania: Minggu, 07:00 WIB\n\xE2\x97\xBE Jadwal RLRS\n\xF0\x9F\x8C\x8D Europe: Sabtu, 00:00 WIB\n\xF0\x9F\x8C\x8ENorth America: Sabtu 06:00 WIB";
-				break;
-
 			//no response (biar gak duplikat, atau ngulang kalimat kita)
 			default:
 				die();
