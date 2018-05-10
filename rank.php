@@ -4,7 +4,7 @@ class Rank
 {
     protected $apiKey = 'Z9VO8OQFV80MKCMBV7VJ23V3WTRO2UYU';
 
-    public $currentSeason = 7;
+    public $currentSeason = '7';
     public $tierList = array("Unranked", "Bronze I", "Bronze II", "Bronze III", "Silver I", "Silver II", "Silver III", "Gold I", "Gold II", "Gold III", "Platinum I", "Platinum II", "Platinum III", "Diamond I", "Diamond II", "Diamond III", "Champion I", "Champion II", "Champion III", "Grand Champion");
 
     public $error = false;
@@ -141,13 +141,12 @@ class Rank
 
     function getMMR($playlistID)
     {
-        $i = '$currentSeason';
-        $j = '$playlistID';
+        $i = $this->$currentSeason;
         $response = $this->response;
-        $point = $response->rankedSeasons->{$i}->{$j}->rankPoints;
-        $tierID = $response->rankedSeasons->{$i}->{$j}->tier;
+        $point = $response->rankedSeasons->{$i}->{$playlistID}->rankPoints;
+        $tierID = $response->rankedSeasons->{$i}->{$playlistID}->tier;
         $tier = $tierList[$tierID];
-        $div = $response->rankedSeasons->{$i}->{$j}->division;
+        $div = $response->rankedSeasons->{$i}->{$playlistID}->division;
         $mmr = '';
         switch ($playlistID) {
             case '10':
@@ -212,7 +211,7 @@ class Rank
 
     function _makeResponse()
     {
-        $i = '$currentSeason';
+        $i = $this->currentSeason;
         $response = $this->response;
         $error_code = $this->error_code;
 
