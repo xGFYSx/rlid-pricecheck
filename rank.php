@@ -210,6 +210,7 @@ class Rank
 
     function _makeResponse()
     {
+        $response = $this->response;
         $error_code = $this->error_code;
 
         //check error
