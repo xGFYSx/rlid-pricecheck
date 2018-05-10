@@ -141,6 +141,9 @@ class Rank
 
     function getMMR($playlist)
     {
+        echo var_dump($playlist);
+        die();
+        
         $point = $playlist->rankPoints;
         $tierID = $playlist->tier;
         $tier = $this->tierList[$tierID];
@@ -163,10 +166,6 @@ class Rank
             $mmr .= "\xE2\x97\xBE Standard (3v3) : $point ($tier Div $div)\n";
                 break;
         }
-
-        echo var_dump($mmr);
-        die();
-
         return $mmr;
     }
 
