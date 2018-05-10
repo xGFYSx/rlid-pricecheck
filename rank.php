@@ -17,7 +17,7 @@ class Rank
     public $default_platform;
     
     //response from api
-    public $response = false;
+    public $response;
     
     //response Speech
     public $speech;
@@ -142,10 +142,10 @@ class Rank
     function getMMR($playlistID)
     {
         $response = $this->response;
-        $point = $response->rankedSeasons->{$currentSeason}->{$playlistID}->rankPoints;
-        $tierID = $response->rankedSeasons->{$currentSeason}->{$playlistID}->tier;
+        $point = $response->rankedSeasons->{'$currentSeason'}->{'$playlistID'}->rankPoints;
+        $tierID = $response->rankedSeasons->{'$currentSeason'}->{'$playlistID'}->tier;
         $tier = $tierList[$tierID];
-        $div = $response->rankedSeasons->{$currentSeason}->{$playlistID}->division;
+        $div = $response->rankedSeasons->{'$currentSeason'}->{'$playlistID'}->division;
         $mmr = '';
         switch ($playlistID) {
             case '10':
@@ -219,12 +219,11 @@ class Rank
         }
 
         // Generate text
-
         $result = '';
         $result .= "\xF0\x9F\x98\xB6 Nama Player : $response->displayName \n";
         $result .= "\xF0\x9F\x8E\xAE Platform : " . strtoupper($response->platform->name) . " \n";
         $result .= "\xF0\x9F\x93\x8A Ranked MMR:\n";
-        foreach ($response->rankedSeasons->{$currentSeason} as $playlist) {
+        foreach ($response->rankedSeasons->{'$currentSeason'} as $playlist) {
             $result .= getMMR($playlist);
         }
             return $result;
