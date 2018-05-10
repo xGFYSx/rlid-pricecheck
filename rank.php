@@ -142,34 +142,35 @@ class Rank
     function getMMR($playlistID, $playlist)
     {
         $mmr = '';
-        $div = 1;
-        $point = $playlist->rankPoints;
+        $div = '';
+        $point = '';
+
         $tierID = $playlist->tier;
-        if ($tierID == 0) {
-            return $mmr;
-        } else {
-            $tier = $this->tierList[$tierID];
-            $div += $playlist->division;
-
-            switch ($playlistID) {
-                case '10':
-                $mmr .= "\t\t\xE2\x96\xAA Duel (1v1)\t: $point - $tier Div $div\n";
-                    break;
-                
-                case '11':
-                $mmr .= "\t\t\xE2\x96\xAA Doubles (2v2)\t: $point - $tier Div $div\n";
-                    break;
-
-                case '12':
-                $mmr .= "\t\t\xE2\x96\xAA Solo Standard (3v3)\t: $point - $tier Div $div\n";
-                    break;
-
-                case '13':
-                $mmr .= "\t\t\xE2\x96\xAA Standard (3v3)\t: $point - $tier Div $div\n";
-                    break;
-            }
-            return $mmr;
+        $tier = $this->tierList[$tierID];
+        if ($tierID != 0){
+            $point .= $playlist->rankPoints." -";
+            $div .= "Div ".($playlist->division+1);
         }
+
+        switch (true) {
+            case '10':
+            $mmr .= "\t\t\xE2\x96\xAA Duel (1v1)\t: $point $tier $div\n";
+                break;
+            
+            case '11':
+            $mmr .= "\t\t\xE2\x96\xAA Doubles (2v2)\t: $point $tier $div\n";
+                break;
+
+            case '12':
+            $mmr .= "\t\t\xE2\x96\xAA Solo Standard (3v3)\t: $point $tier $div\n";
+                break;
+
+            case '13':
+            $mmr .= "\t\t\xE2\x96\xAA Standard (3v3)\t: $point $tier $div\n";
+                break;
+        }
+        return $mmr;
+        
     }
 
     function getRank()
