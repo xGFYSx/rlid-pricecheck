@@ -141,16 +141,12 @@ class Rank
 
     function getMMR($playlist)
     {
-        echo var_dump($playlist);
-        die();
-        $i = $this->$currentSeason;
-        $response = $this->response;
-        $point = $response->rankedSeasons->{$i}->{$playlistID}->rankPoints;
-        $tierID = $response->rankedSeasons->{$i}->{$playlistID}->tier;
+        $point = $playlist->rankPoints;
+        $tierID = $playlist->tier;
         $tier = $tierList[$tierID];
-        $div = $response->rankedSeasons->{$i}->{$playlistID}->division;
+        $div = $playlist->division;
         $mmr = '';
-        switch ($playlistID) {
+        switch ($playlist) {
             case '10':
             $mmr .= "\xE2\x97\xBE Duel (1v1) : $point ($tier Div $div)\n";
                 break;
