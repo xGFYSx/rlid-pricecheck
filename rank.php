@@ -12,7 +12,7 @@ class Rank
     public $error_code;
     
     public $query = '';
-    public $platform = 'pc';
+    public $platform = '';
     
     public $default_platform;
     
@@ -141,29 +141,34 @@ class Rank
 
     function getMMR($playlistID, $playlist)
     {
+        $mmr = '';
         $point = $playlist->rankPoints;
         $tierID = $playlist->tier;
-        $tier = $this->tierList[$tierID];
-        $div = $playlist->division;
-        $mmr = " ";
-        switch ($playlistID) {
-            case '10':
-            $mmr .= "\xE2\x97\xBE Duel (1v1) : $point ($tier Div $div)\n";
-                break;
-            
-            case '11':
-            $mmr .= "\xE2\x97\xBE Doubles (2v2) : $point ($tier Div $div)\n";
-                break;
+        if ($tierID == 0) {
+            return $mmr;
+        } else {
+            $tier = $this->tierList[$tierID];
+            $div = $playlist->division;
 
-            case '12':
-            $mmr .= "\xE2\x97\xBE Solo Standard (3v3) : $point ($tier Div $div)\n";
-                break;
+            switch ($playlistID) {
+                case '10':
+                $mmr .= "\t\xE2\x96\xAA Duel (1v1)\t: $point - $tier Div $div\n";
+                    break;
+                
+                case '11':
+                $mmr .= "\t\xE2\x96\xAA Doubles (2v2)\t: $point - $tier Div $div\n";
+                    break;
 
-            case '13':
-            $mmr .= "\xE2\x97\xBE Standard (3v3) : $point ($tier Div $div)\n";
-                break;
+                case '12':
+                $mmr .= "\t\xE2\x96\xAA Solo Standard (3v3)\t: $point - $tier Div $div\n";
+                    break;
+
+                case '13':
+                $mmr .= "\t\xE2\x96\xAA Standard (3v3)\t: $point - $tier Div $div\n";
+                    break;
+            }
+            return $mmr;
         }
-        return $mmr;
     }
 
     function getRank()
@@ -225,7 +230,8 @@ class Rank
         foreach ($response->rankedSeasons->{$i} as $playlistID => $playlist) {
             $result .= $this->getMMR($playlistID, $playlist);
         }
-            return $result;
+        $result .= "\xF0\x9F\x8C\x90 $response->profileUrl";
+        return $result;
     }
 }
 
