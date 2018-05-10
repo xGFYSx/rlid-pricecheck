@@ -141,6 +141,8 @@ class Rank
 
     function getMMR($playlist)
     {
+        echo var_dump($playlist);
+        die();
         $i = $this->$currentSeason;
         $response = $this->response;
         $point = $response->rankedSeasons->{$i}->{$playlistID}->rankPoints;
@@ -225,8 +227,6 @@ class Rank
         $result .= "\xF0\x9F\x98\xB6 Nama Player : $response->displayName \n";
         $result .= "\xF0\x9F\x8E\xAE Platform : " . strtoupper($response->platform->name) . " \n";
         $result .= "\xF0\x9F\x93\x8A Ranked MMR:\n";
-        echo var_dump($response->rankedSeasons->{$i});
-        die();
         foreach ($response->rankedSeasons->{$i} as $playlist) {
             $result .= $this->getMMR($playlist);
         }
