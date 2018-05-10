@@ -152,7 +152,7 @@ class Rank
             $div .= "Div ".($playlist->division+1);
         }
 
-        switch (true) {
+        switch ($playlistID) {
             case '10':
             $mmr .= "\t\t\xE2\x96\xAA Duel (1v1)\t: $point $tier $div\n";
                 break;
