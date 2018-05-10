@@ -145,7 +145,7 @@ class Rank
         $tierID = $playlist->tier;
         $tier = $this->tierList[$tierID];
         $div = $playlist->division;
-        $mmr = '';
+        $mmr = " ";
         switch ($playlist) {
             case '10':
             $mmr .= "\xE2\x97\xBE Duel (1v1) : $point ($tier Div $div)\n";
