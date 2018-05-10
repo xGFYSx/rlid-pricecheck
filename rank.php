@@ -152,15 +152,15 @@ class Rank
             $mmr .= "\xE2\x97\xBE Duel (1v1) : $point ($tier Div $div)\n";
                 break;
             
-            case '11'
+            case '11':
             $mmr .= "\xE2\x97\xBE Doubles (2v2) : $point ($tier Div $div)\n";
                 break;
 
-            case '12'
+            case '12':
             $mmr .= "\xE2\x97\xBE Solo Standard (3v3) : $point ($tier Div $div)\n";
                 break;
 
-            case '13'
+            case '13':
             $mmr .= "\xE2\x97\xBE Standard (3v3) : $point ($tier Div $div)\n";
                 break;
         }
