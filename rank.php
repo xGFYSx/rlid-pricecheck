@@ -48,7 +48,7 @@ class Rank
         }
 
         if (strlen($query) <= 6 ) {
-            $this->error_code = 0;
+            $this->error_code = 1;
             return $this;
         } else {
                 //remove !price from string
@@ -57,12 +57,15 @@ class Rank
                 //remove platform from string
             foreach ($this->default_platform as $var) {
                 foreach ($var as $varr) {
-                    if( is_int( strpos($query,$varr) ) == TRUE ){
-                        $this->platform = $varr;
-                        $varr .= " ";
+                    if( preg_match("/\b".$varr."\b/", $query) ){
                         $query = str_replace($varr, '', $query);
+                        $this->platform = $varr;
                     }   
                 }
+            }
+
+            if (is_null($query)){
+                $this->error_code = 0;
             }
             
             $this->query = $query;
