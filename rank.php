@@ -226,7 +226,11 @@ class Rank
 
         // Generate text
         $result = '';
-        $displayName = utf8_decode($response->displayName);
+        $displayName = $response->displayName;
+        $playerName = utf8_decode($displayName);
+        echo var_dump($playerName);
+        die();
+
         $result .= "\xF0\x9F\x98\xB6 Nama Player: $displayName\n";
         $result .= "\xF0\x9F\x8E\xAE Platform: ".$response->platform->name."\n";
         $result .= "\xF0\x9F\x93\x8A Ranked MMR:\n";
