@@ -64,6 +64,10 @@ class Rank
                 }
             }
 
+            echo var_dump($this->platform);
+            echo var_dump($query);
+            die;
+
             if (is_null($query)){
                 $this->error_code = 0;
             }
