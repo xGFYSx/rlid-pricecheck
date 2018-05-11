@@ -226,8 +226,8 @@ class Rank
 
         // Generate text
         $result = '';
-        $playerName = utf8_decode($displayName);
-        echo var_dump($response->displayName);
+        $playerName = utf8_decode($response->displayName);
+        echo ($playerName);
         die();
 
         $result .= "\xF0\x9F\x98\xB6 Nama Player: $displayName\n";
