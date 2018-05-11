@@ -226,11 +226,8 @@ class Rank
 
         // Generate text
         $result = '';
-        $text = $response->displayName;
-        echo var_dump(htmlspecialchars_decode($text));
-        die();
-
-        $result .= "\xF0\x9F\x98\xB6 Nama Player: $displayName\n";
+        $player = htmlspecialchars_decode($response->displayName);
+        $result .= "\xF0\x9F\x98\xB6 Nama Player: $player\n";
         $result .= "\xF0\x9F\x8E\xAE Platform: ".$response->platform->name."\n";
         $result .= "\xF0\x9F\x93\x8A Ranked MMR:\n";
         foreach ($response->rankedSeasons->{$i} as $playlistID => $playlist) {
