@@ -59,7 +59,7 @@ class Rank
                 foreach ($var as $varr) {
                     if( preg_match("/\b".$varr."\b/", $query) ){
                         $query = str_replace($varr, '', $query);
-                        $this->platform = $varr;
+                        $this->platform = $var;
                     }   
                 }
             }
