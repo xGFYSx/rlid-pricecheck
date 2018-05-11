@@ -62,6 +62,22 @@ if( $method )
 
 		//normal response
 		switch($text) {
+			case '!credit':
+				$text = "All prices courtesy of https://rl.insider.gg\nSpecial thanks to:\n \xE2\x96\xAA Ruffe - Ananta Rizki F. (Mastermind) \n \xE2\x96\xAA xGFYSx - Dewantara Tirta (Programmer)\n \xE2\x96\xAA FRDS  - Agung Firdaus (Tester and Helper)\n \xE2\x96\xAA Yggdrasil128 and colleagues (Devs at RL Insider)\n \xE2\x96\xAA AeonLucid (API dev at RLStats).";
+				break;
+
+			case '!help':
+				$text = "\xE2\x9D\x97 Daftar perintah :\n \xE2\x96\xAA !help - Menampilkan pesan panduan\n \xE2\x96\xAA !price <nama item> <warna (optional)> <platform> - Mengecek harga item\n \xE2\x96\xAA !rank <platform (PC/PS4)> <Username> - Mengecek rank/MMR kamu\n \xE2\x96\xAA !mabar - Menampilkan pesan otomatis mabar/sparring RLID\n \xE2\x96\xAA !rlid - Menampilkan daftar media sosial RLID\n \xE2\x96\xAA !credit - Menampilkan pesan credit";
+				break;
+
+			case '!rlid':
+				$text = "\xE2\x9E\xA1 Facebook Page : http://www.facebook.com/RocketLeagueID\n\xE2\x9E\xA1 Grup Steam : http://steamcommunity.com/groups/RLID\n\xE2\x9E\xA1 Instagram : http://www.instagram.com/rocketleague.id\n\xE2\x9E\xA1 Grup Line Square : http://line.me/ti/g2/ICUFW8K9FE\n\xE2\x9E\xA1 Discord : https://discord.gg/Fg7B557";
+				break;
+
+			case '!mabar':
+				$text = "\xF0\x9F\x8F\x81 SPARRING/MABAR RLID \xE2\x9A\xBD \xF0\x9F\x8F\x8E\n\xF4\x80\x82\x8D Ayo ikut sparring/mabar komunitas!\n\nIkutnya gampang, tinggal join private match dengan format room :\n\xE2\x9E\xA1 name : rlid\n\xE2\x9E\xA1 password : rlid\n\n\xE2\x9D\x97 Jangan lupa untuk join di voice chat discord di channel \"Parkiran\"";
+				break;
+			
 			//no response (biar gak duplikat, atau ngulang kalimat kita)
 			default:
 				die();
