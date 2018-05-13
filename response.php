@@ -12,10 +12,9 @@ class ResponseMsg {
 
   public function setText($speech,$text)
   {
-
     // $this->__set( 'speech', trim(preg_replace('/\s+/', ' ', $speech)) );
-    $this->__set( 'speech', "\xE2\x9A\xA0 Bot sedang dalam maintenance. Mohon ditunggu ya... \xF4\x80\x82\x92" );
-    $this->__set( 'displayText', "\xE2\x9A\xA0 Bot sedang dalam maintenance. Mohon ditunggu ya... \xF4\x80\x82\x92" );
+    $this->__set( 'speech', $speech);
+    $this->__set( 'displayText', $text);
     return $this;
   }
 
