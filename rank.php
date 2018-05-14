@@ -185,7 +185,11 @@ class Rank
             $key = $this->apiKey;
             $platform = $this->platform;
             $user = $this->query;
-            
+
+            echo var_dump($key);
+            echo var_dump($platform);
+            echo var_dump($user);
+
             $curl = curl_init();
 
             //set curl option
