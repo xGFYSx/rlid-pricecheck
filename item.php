@@ -51,7 +51,7 @@ class Item
         }
         
         if (strlen($query) <= 7) {
-            throw new Exception('',0);
+            throw new Exception(0);
         } else {
             //remove !price from string
             $query = str_replace('!price ', '', $query);
@@ -70,7 +70,7 @@ class Item
             }
             
             if ($query == '') {
-                throw new Exception('',0);
+                throw new Exception(0);
             } else {
                 $this->query = $query;
                 return $this;
@@ -95,7 +95,7 @@ class Item
                 break;
             
             default:
-                throw new Exception('',1);
+                throw new Exception(1);
                 break;
                 
         endswitch;
@@ -192,7 +192,7 @@ class Item
                 throw new Exception($err, 5);      
             } else //error yg lain
                 {
-                throw new Exception('',$temp->ErrorCode + 1);
+                throw new Exception($temp->ErrorCode + 1);
             }
         } else {
             $this->response = $temp;
