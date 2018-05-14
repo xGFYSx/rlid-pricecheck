@@ -47,10 +47,7 @@ if ($method) {
                     die();
                 }
                 catch (Exception $e) {
-                    echo var_dump($e->getCode());
-                    echo var_dump($e->getMessage());
-                    die();
-                    $result = $rank->error($e->getCode(), $e->getMessage();
+                    $result = $rank->error($e->getCode(), $e->getMessage());
                     echo $response->setText($result, $result)->result();
                     die();
                 }
