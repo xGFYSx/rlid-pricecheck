@@ -203,7 +203,8 @@ class Rank
             curl_close($curl);
             $temp =  json_decode($response);
 
-            if(isset($temp->code){
+            if(isset($temp->code))
+            {
                 switch ($temp->code) {
 
                     case '404':
