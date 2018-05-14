@@ -54,7 +54,7 @@ if( $method )
 						// $result = $rank->setQuery($json->result->resolvedQuery)
 						// 								->setPlatform($rank->platform)
 						// 								->getRank();
-						echo $response->setText( "\xE2\x9A\xA0 Fungsi bot ini sedang dalam maintenance. Mohon ditunggu ya... \xF4\x80\x82\x92" , "\xE2\x9A\xA0 Fungsi bot ini sedang dalam maintenance. Mohon ditunggu ya... \xF4\x80\x82\x92")->result();
+						// echo $response->setText( $result , $result)->result();
 						die();
 					break;
 			endswitch;
