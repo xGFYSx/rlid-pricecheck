@@ -192,7 +192,6 @@ class Rank
             curl_setopt_array($curl, array(
               CURLOPT_URL => 'https://api.rocketleaguestats.com/v1/player?platform_id=$platform&unique_id=$user',
               CURLOPT_RETURNTRANSFER => true,
-              CURLOPT_ENCODING => '',
               CURLOPT_MAXREDIRS => 10,
               CURLOPT_TIMEOUT => 30,
               CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
@@ -206,6 +205,9 @@ class Rank
             $err        = curl_error($curl);
             curl_close($curl);
             $temp =  json_decode($response);
+
+            echo var_dump($err);
+            die();
 
             if(isset($temp->code) && ($temp->code == '404')){
                 $this->error_code = 3;
