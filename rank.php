@@ -190,7 +190,7 @@ class Rank
 
             //set curl option
             curl_setopt_array($curl, array(
-              CURLOPT_URL => 'https://api.rocketleaguestats.com/v1/player?platform_id=$platform&unique_id=$user',
+              CURLOPT_URL => 'https://api.rocketleaguestats.com/v1/player?platform_id=1&unique_id=frds',
               CURLOPT_RETURNTRANSFER => true,
               CURLOPT_MAXREDIRS => 10,
               CURLOPT_TIMEOUT => 30,
@@ -206,6 +206,7 @@ class Rank
             curl_close($curl);
             $temp =  json_decode($response);
 
+            echo var_dump($temp);
             echo var_dump($err);
             die();
 
