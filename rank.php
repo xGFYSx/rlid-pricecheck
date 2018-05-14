@@ -67,6 +67,9 @@ class Rank
                     }   
                 }
             }
+
+            echo var_dump($query);
+            echo var_dump($this->platform);
             $this->query = $query;
             return $this;
         }
@@ -181,6 +184,9 @@ class Rank
         $platform = $this->platform;
         $user = $this->query;
 
+        echo var_dump($platform);
+        echo var_dump($user);
+
         if ($user == ""){
             $this->error_code = 0;
             return $this;
@@ -225,6 +231,8 @@ class Rank
         $i = $this->currentSeason;
         $response = $this->response;
         $error_code = $this->error_code;
+
+        echo var_dump($response);
 
         //check error
         if (isset($error_code)) {
