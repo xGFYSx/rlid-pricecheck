@@ -39,49 +39,43 @@ class Item
                 '/\bps4\b/i',
                 '/\bps4$/i',
                 '/\bps\b/i',
-                '/\bps$/i'
+                '/\bps$/i',
             )
         );
     }
     
     function setQuery($query)
     {
-        if (is_int(strpos($query, '!price')) == FALSE) {
-            exit();
+        if( is_int( strpos($query,'!price') ) == FALSE ){
+          exit();
         }
-        
-        if (strlen($query) <= 7) {
-            throw new Exception(0);
+
+        if (strlen($query) <= 7 ) {
+            $this->error_code = 0;
+            return $this;
         } else {
-            //remove !price from string
+                //remove !price from string
             $query = str_replace('!price ', '', $query);
             
-            //remove platform from string
+                //remove platform from string
             foreach ($this->default_platform as $key => $var) {
                 foreach ($var as $varr) {
-                    if (preg_match($varr, $query)) {
-                        $query          = preg_replace(array(
-                            $varr,
-                            '/\s+/'
-                        ), '', $query);
+                    if( preg_match($varr, $query)){
+                        $query = preg_replace(array($varr, '/\s+/'),'', $query);
                         $this->platform = $key;
-                    }
+                    }   
                 }
             }
             
-            if ($query == '') {
-                throw new Exception(0);
-            } else {
-                $this->query = $query;
-                return $this;
-            }
+            $this->query = $query;
+            return $this;
         }
     }
-    
+
     function setPlatform()
     {
         switch ($this->platform):
-            
+
             case '':
                 $this->platform = 'pc';
                 break;
@@ -94,8 +88,12 @@ class Item
                 $this->platform = 'ps4';
                 break;
             
+            case 'ps':
+                $this->platform = 'ps4';
+                break;
+            
             default:
-                throw new Exception(1);
+                $this->error_code = 1;
                 break;
                 
         endswitch;
@@ -147,95 +145,111 @@ class Item
         $this->speech = $msg;
         return $msg;
     }
-    
+
     function result($msg)
     {
         $this->response = $msg;
         return $msg;
     }
-    
+
     function getPrice()
     {
         $data = array(
             'platform' => $this->platform,
             'item' => $this->query
         );
-        
-        $curl = curl_init();
-        
-        //set curl option
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => $this->apiUrl,
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => json_encode($data),
-            CURLOPT_HTTPHEADER => array(
-                "x-api-key: " . $this->apikey
-            ),
-            CURLOPT_RETURNTRANSFER => TRUE
-        ));
-        $response = curl_exec($curl);
-        $err      = curl_error($curl);
-        
-        curl_close($curl);
-        $temp = json_decode($response);
-        
-        if (isset($temp->ErrorCode)) {
-            //jika multiple items
-            if ($temp->ErrorCode == '4') {
-                $err = '';
-                foreach ($temp->Matches as $val) {
-                    $err .= "$val \n";
-                }
-                throw new Exception($err, 5);      
-            } else //error yg lain
-                {
-                throw new Exception($temp->ErrorCode + 1);
-            }
-        } else {
-            $this->response = $temp;
+
+        if ($data['item'] == ""){
+            $this->error_code = 0;
             return $this;
+        } else {
+            $curl = curl_init();
+            
+            //set curl option
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => $this->apiUrl,
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 30,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POSTFIELDS => json_encode($data),
+                CURLOPT_HTTPHEADER => array(
+                    "x-api-key: " . $this->apikey
+                ),
+                CURLOPT_RETURNTRANSFER => TRUE
+            ));
+            $response = curl_exec($curl);
+            $err      = curl_error($curl);
+            
+            curl_close($curl);
+            $this->response = json_decode($response);
+            
+            if ($err) {
+                $this->error($err);
+            } else {
+                // return $response;
+                return $this->_makeResponse();
+            }
         }
     }
-    
-    function makeResponse()
+
+    function _makeResponse()
     {
-        $response = $this->response;
-        $cert     = FALSE;
-        $color    = FALSE;
+        $response   = $this->response;
+        $error_code = $this->error_code;
         
-        //check  cert
-        if (isset($response->Cert) && $response->Cert != 'false') {
-            $cert = $response->Cert;
+        //check error
+        if (isset($error_code)) {
+            return $this->error($error_code);
         }
         
-        //check color
-        if (isset($response->PaintName) && strtolower($response->PaintName) != 'default') {
-            $color = $response->PaintName;
+        if (isset($response->ErrorCode)) {
+            //jika multiple items
+            if ($response->ErrorCode == '4') {
+                $err = '';
+                foreach ($response->Matches as $val) {
+                    $err .= "$val \n";
+                }
+                return $this->error(5, $err);
+            } else //error yg lain
+                {
+                return $this->error($response->ErrorCode + 1);
+            }
+        } else {
+            $cert  = FALSE;
+            $color = FALSE;
+            
+            //check  cert
+            if (isset($response->Cert) && $response->Cert != 'false') {
+                $cert = $response->Cert;
+            }
+            
+            //check color
+            if (isset($response->PaintName) && strtolower($response->PaintName) != 'default') {
+                $color = $response->PaintName;
+            }
+            
+            //generate displayText
+            $result = '';
+            
+            if ($cert != FALSE) {
+                $result .= "$cert  ";
+            }
+            
+            $result .= "\xE2\x9E\xA1 ";
+            
+            //add color before item name
+            if ($color != FALSE) {
+                $result .= "$color ";
+            }
+            $result .= "$response->ItemName \n";
+            
+            $result .= "\xF0\x9F\x8E\xAE Platform : " . strtoupper($this->platform) . " \n";
+            $result .= "\xF0\x9F\x94\x91 Price : $response->Price \n";
+            $result .= "\xF0\x9F\x8C\x90 $response->URL \n";
+            
+            return $result;
         }
-        
-        //generate displayText
-        $result = '';
-        
-        if ($cert != FALSE) {
-            $result .= "$cert  ";
-        }
-        
-        $result .= "\xE2\x9E\xA1 ";
-        
-        //add color before item name
-        if ($color != FALSE) {
-            $result .= "$color ";
-        }
-        $result .= "$response->ItemName \n";
-        
-        $result .= "\xF0\x9F\x8E\xAE Platform : " . strtoupper($this->platform) . " \n";
-        $result .= "\xF0\x9F\x94\x91 Price : $response->Price \n";
-        $result .= "\xF0\x9F\x8C\x90 $response->URL \n";
-        
-        return $result;
     }
 }
 ?>
