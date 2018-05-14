@@ -30,12 +30,16 @@ class Item
         
         $this->default_platform = array(
             'pc' => array(
-                'pc',
-                'steam'
+                '/\bpc\b/i',
+                '/\bpc$/i',
+                '/\bsteam\b/i',
+                '/\bsteam$/i'
             ),
             'ps4' => array(
-                'ps4',
-                'ps'
+                '/\bps4\b/i',
+                '/\bps4$/i',
+                '/\bps\b/i',
+                '/\bps$/i',
             )
         );
     }
@@ -54,13 +58,18 @@ class Item
             $query = str_replace('!price ', '', $query);
             
                 //remove platform from string
-            foreach ($this->default_platform as $var) {
+            foreach ($this->default_platform as $key => $var) {
                 foreach ($var as $varr) {
-                    if( preg_match("/\b".$varr."\b/", $query) ){
-                        $query = str_replace($varr, '', $query);
-                        $this->platform = key($var);
-                    }
+                    if( preg_match($varr, $query)){
+                        $query = preg_replace($varr, '', $query);
+                        $this->platform = $key;
+                    }   
                 }
+            }
+
+            if ($query == ""){
+                $this->error_code = 0;
+                return $this;
             }
             
             $this->query = $query;

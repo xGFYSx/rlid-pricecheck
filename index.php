@@ -50,11 +50,11 @@ if( $method )
 					break;
 
 					case 'checkrank':
-						// $rank = new Rank;
-						// $result = $rank->setQuery($json->result->resolvedQuery)
-						// 								->setPlatform($rank->platform)
-						// 								->getRank();
-						// echo $response->setText( $result , $result)->result();
+						$rank = new Rank;
+						$result = $rank->setQuery($json->result->resolvedQuery)
+														->setPlatform($rank->platform)
+														->getRank();
+						echo $response->setText( $result , $result)->result();
 						die();
 					break;
 			endswitch;
