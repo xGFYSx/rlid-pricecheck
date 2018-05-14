@@ -68,8 +68,6 @@ class Rank
                 }
             }
 
-            echo var_dump($query);
-            echo var_dump($this->platform);
             $this->query = $query;
             return $this;
         }
@@ -184,15 +182,13 @@ class Rank
         $platform = $this->platform;
         $user = $this->query;
 
-        echo var_dump($platform);
-        echo var_dump($user);
-
         if ($user == ""){
             $this->error_code = 0;
             return $this;
         } else {
             $curl = curl_init();
 
+            //set curl option
             curl_setopt_array($curl, array(
               CURLOPT_URL => 'https://api.rocketleaguestats.com/v1/player?platform_id=$platform&unique_id=$user',
               CURLOPT_RETURNTRANSFER => true,
@@ -206,12 +202,10 @@ class Rank
               ),
             ));
 
-            $response = curl_exec($curl);
-            $err = curl_error($curl);
+            $response   = curl_exec($curl);
+            $err        = curl_error($curl);
             curl_close($curl);
             $temp =  json_decode($response);
-
-            echo var_dump($temp);
 
             if(isset($temp->code) && ($temp->code == '404')){
                 $this->error_code = 3;
@@ -223,7 +217,7 @@ class Rank
                 $this->error($err);
             } else {
                 // return $response;
-                return $this->_makeResponse($temp);
+                return $this->_makeResponse();
             }
         }
     }
@@ -233,8 +227,6 @@ class Rank
         $i = $this->currentSeason;
         $response = $this->response;
         $error_code = $this->error_code;
-
-        echo var_dump($response);
 
         //check error
         if (isset($error_code)) {
