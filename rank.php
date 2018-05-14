@@ -204,6 +204,7 @@ class Rank
             }
 
             $this->response = $temp;
+            return $this;
         }
     }
 
