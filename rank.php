@@ -2,16 +2,16 @@
 
 class Rank
 {
-    protected $apiKey = "Z9VO8OQFV80MKCMBV7VJ23V3WTRO2UYU";
+    protected $apiKey = 'Z9VO8OQFV80MKCMBV7VJ23V3WTRO2UYU';
 
-    public $currentSeason = "7";
+    public $currentSeason = '7';
     public $tierList = array("Unranked", "Bronze I", "Bronze II", "Bronze III", "Silver I", "Silver II", "Silver III", "Gold I", "Gold II", "Gold III", "Platinum I", "Platinum II", "Platinum III", "Diamond I", "Diamond II", "Diamond III", "Champion I", "Champion II", "Champion III", "Grand Champion");
 
     public $error = false;
     public $error_msg = "";
     
-    public $query = "";
-    public $platform = "";
+    public $query = '';
+    public $platform = '';
     
     public $default_platform;
     
@@ -29,13 +29,13 @@ class Rank
     {
         
         $this->default_platform = array(
-            "pc" => array(
+            'pc' => array(
                 "/\bpc\b/i",
                 "/\bpc$/i",
                 "/\bsteam\b/i",
                 "/\bsteam$/i"
             ),
-            "ps4" => array(
+            'ps4' => array(
                 "/\bps4\b/i",
                 "/\bps4$/i",
                 "/\bps\b/i",
@@ -46,21 +46,21 @@ class Rank
 
     function setQuery($query)
     {
-        if( is_int( strpos($query,"!rank") ) == FALSE ){
+        if( is_int( strpos($query,'!rank') ) == FALSE ){
           exit();
         }
 
         if (strlen($query) <= 6 ) {
-            throw new Exception("1");
+            throw new Exception('1');
         } else {
             //remove !price from string
-            $query = str_replace("!rank ", "", $query);
+            $query = str_replace('!rank ', '', $query);
             
             //remove platform from string
             foreach ($this->default_platform as $key => $var) {
                 foreach ($var as $varr) {
                     if( preg_match($varr, $query)){
-                        $query = preg_replace(array($varr,"/\s+/"), "", $query);
+                        $query = preg_replace(array($varr,"/\s+/"), '', $query);
                         $this->platform = $key;
                     }   
                 }
@@ -75,20 +75,16 @@ class Rank
     {
         switch ($platform):
             
-            case "":
-                throw new Exception("1");
+            case '':
+                throw new Exception('1');
                 break;
             
-            case "pc":
-                $this->platform = "1";
+            case 'pc':
+                $this->platform = '1';
                 break;
             
-            case "ps4":
-                $this->platform = "2";
-                break;
-            
-            case "ps":
-                $this->platform = "2";
+            case 'ps4':
+                $this->platform = '2';
                 break;
             
             default:
@@ -142,9 +138,9 @@ class Rank
 
     function getMMR($playlistID, $playlist)
     {
-        $mmr = "";
-        $div = "";
-        $point = "";
+        $mmr = '';
+        $div = '';
+        $point = '';
 
         $tierID = $playlist->tier;
         $tier = $this->tierList[$tierID];
@@ -154,19 +150,19 @@ class Rank
         }
 
         switch ($playlistID) {
-            case "10":
+            case '10':
             $mmr .= "\t\t\xE2\x96\xAA Duel (1v1): $point $tier $div\n";
                 break;
             
-            case "11":
+            case '11':
             $mmr .= "\t\t\xE2\x96\xAA Doubles (2v2): $point $tier $div\n";
                 break;
 
-            case "12":
+            case '12':
             $mmr .= "\t\t\xE2\x96\xAA Solo Standard (3v3): $point $tier $div\n";
                 break;
 
-            case "13":
+            case '13':
             $mmr .= "\t\t\xE2\x96\xAA Standard (3v3): $point $tier $div\n";
                 break;
         }
@@ -176,29 +172,25 @@ class Rank
 
     function getRank()
     {  
-        if ($this->query == ""){
-            throw new Exception("0");
+        if ($this->query == ''){
+            throw new Exception('0');
         } else {
             $key = $this->apiKey;
             $platform = $this->platform;
             $user = $this->query;
 
-            echo var_dump($key);
-            echo var_dump($platform);
-            echo var_dump($user);
-
             $curl = curl_init();
 
             //set curl option
             curl_setopt_array($curl, array(
-              CURLOPT_URL => "https://api.rocketleaguestats.com/v1/player?platform_id=".$platform."&unique_id=".$user,
+              CURLOPT_URL => "https://api.rocketleaguestats.com/v1/player?platform_id=$platform&unique_id=$user",
               CURLOPT_RETURNTRANSFER => true,
               CURLOPT_MAXREDIRS => 10,
               CURLOPT_TIMEOUT => 30,
               CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
               CURLOPT_CUSTOMREQUEST => "GET",
               CURLOPT_HTTPHEADER => array(
-                "authorization: ".$key,
+                "authorization: $key",
               ),
             ));
 
@@ -207,18 +199,15 @@ class Rank
             curl_close($curl);
             $temp =  json_decode($response);
 
-            echo var_dump($temp);
-            die();
-
-            if(isset($temp->code) && ($temp->code == "404")){
-                throw new Exception("3");
+            if(isset($temp->code) && ($temp->code == '404')){
+                throw new Exception('3');
             }
 
             $this->response = $temp;
         }
     }
 
-    function _makeResponse()
+    function makeResponse()
     {
         $i = $this->currentSeason;
         $response = $this->response;

@@ -55,15 +55,16 @@ if( $method )
 					{
 						$result = $rank->setQuery($json->result->resolvedQuery)
 														->setPlatform($rank->platform)
-														->getRank();
+														->getRank()
+														->makeResponse();
 						echo $response->setText( $result , $result)->result();
 						die();
-					
 					}
 					catch (Exception $e)
 					{
 						$result = $rank->error($e->getMessage());
 						echo $response->setText( $result , $result)->result();
+						die();
 					}
 					break;
 			endswitch;
