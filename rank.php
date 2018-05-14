@@ -177,15 +177,15 @@ class Rank
     }
 
     function getRank()
-    {   
-        $key = $this->apiKey;
-        $platform = $this->platform;
-        $user = $this->query;
-
-        if ($user == ""){
+    {  
+        if ($this->query == ""){
             $this->error_code = 0;
             return $this;
         } else {
+            $key = $this->apiKey;
+            $platform = $this->platform;
+            $user = $this->query;
+            
             $curl = curl_init();
 
             //set curl option
