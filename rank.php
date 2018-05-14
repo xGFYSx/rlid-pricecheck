@@ -91,7 +91,7 @@ class Rank
                 break;
             
             default:
-                throw new Exception("2");
+                throw new Exception('2');
                 break;
                 
         endswitch;
@@ -116,7 +116,7 @@ class Rank
                 break;
             
             case 3:
-                $msg = "\xE2\x9A\xA0 Usernamenya gak ketemu gan.";
+                $msg = "\xF4\x80\x81\xBA Usernamenya gak ketemu gan. Mungkin salah ketik?";
                 break;
             
             case 4:
