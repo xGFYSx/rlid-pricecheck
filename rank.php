@@ -9,7 +9,6 @@ class Rank
 
     public $error = false;
     public $error_msg = "";
-    public $error_code;
     
     public $query = "";
     public $platform = "";
@@ -52,8 +51,7 @@ class Rank
         }
 
         if (strlen($query) <= 6 ) {
-            $this->error_code = 1;
-            return $this;
+            throw new Exception("1");
         } else {
                 //remove !price from string
             $query = str_replace("!rank ", "", $query);
@@ -78,7 +76,7 @@ class Rank
         switch ($platform):
             
             case "":
-                $this->error_code = 1;
+                throw new Exception("1");
                 break;
             
             case "pc":
@@ -94,7 +92,7 @@ class Rank
                 break;
             
             default:
-                $this->error_code = 2;
+                throw new Exception("2");
                 break;
                 
         endswitch;
@@ -102,7 +100,7 @@ class Rank
         return $this;
     }
     
-    function error($code, $external_msg = "")
+    function error($code)
     {
         switch ($code):
             
@@ -179,8 +177,7 @@ class Rank
     function getRank()
     {  
         if ($this->query == ""){
-            $this->error_code = 0;
-            return $this;
+            throw new Exception("0");
         } else {
             $key = $this->apiKey;
             $platform = $this->platform;
@@ -207,17 +204,10 @@ class Rank
             $temp =  json_decode($response);
 
             if(isset($temp->code) && ($temp->code == "404")){
-                $this->error_code = 3;
+                throw new Exception("3");
             }
 
             $this->response = $temp;
-
-            if ($err) {
-                $this->error($err);
-            } else {
-                // return $response;
-                return $this->_makeResponse($temp);
-            }
         }
     }
 
@@ -225,12 +215,6 @@ class Rank
     {
         $i = $this->currentSeason;
         $response = $this->response;
-        $error_code = $this->error_code;
-
-        //check error
-        if (isset($error_code)) {
-            return $this->error($error_code);
-        }
 
         // Generate text
         $result = "";

@@ -50,12 +50,21 @@ if( $method )
 					break;
 
 					case 'checkrank':
-						$rank = new Rank;
+					$rank = new Rank;
+					try
+					{
 						$result = $rank->setQuery($json->result->resolvedQuery)
 														->setPlatform($rank->platform)
 														->getRank();
 						echo $response->setText( $result , $result)->result();
 						die();
+					
+					}
+					catch (Exception $e)
+					{
+						$result = $rank->error($e->getMessage());
+						echo $response->setText( $result , $result)->result();
+					}
 					break;
 			endswitch;
 		}
