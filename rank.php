@@ -62,12 +62,13 @@ class Rank
             foreach ($this->default_platform as $key => $var) {
                 foreach ($var as $varr) {
                     if( preg_match($varr, $query)){
-                        $query = preg_replace($varr." ", '', $query);
+                        $query = preg_replace(array($varr,'/\s+/'), '', $query);
                         $this->platform = $key;
                     }   
                 }
             }
             echo var_dump($query);
+            die();
             $this->query = $query;
             return $this;
         }
