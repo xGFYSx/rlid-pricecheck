@@ -53,10 +53,10 @@ class Rank
         if (strlen($query) <= 6 ) {
             throw new Exception("1");
         } else {
-                //remove !price from string
+            //remove !price from string
             $query = str_replace("!rank ", "", $query);
             
-                //remove platform from string
+            //remove platform from string
             foreach ($this->default_platform as $key => $var) {
                 foreach ($var as $varr) {
                     if( preg_match($varr, $query)){
@@ -183,6 +183,10 @@ class Rank
             $platform = $this->platform;
             $user = $this->query;
 
+            echo var_dump($key);
+            echo var_dump($platform);
+            echo var_dump($user);
+
             $curl = curl_init();
 
             //set curl option
@@ -202,6 +206,9 @@ class Rank
             $err        = curl_error($curl);
             curl_close($curl);
             $temp =  json_decode($response);
+
+            echo var_dump($temp);
+            die();
 
             if(isset($temp->code) && ($temp->code == "404")){
                 throw new Exception("3");
