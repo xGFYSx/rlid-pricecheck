@@ -197,7 +197,7 @@ class Rank
               CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
               CURLOPT_CUSTOMREQUEST => 'GET',
               CURLOPT_HTTPHEADER => array(
-                'authorization: $key',
+                'authorization: Z9VO8OQFV80MKCMBV7VJ23V3WTRO2UYU',
               ),
             ));
 
