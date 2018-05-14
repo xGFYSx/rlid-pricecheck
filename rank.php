@@ -211,6 +211,8 @@ class Rank
             curl_close($curl);
             $temp =  json_decode($response);
 
+            echo var_dump($temp);
+
             if(isset($temp->code) && ($temp->code == '404')){
                 $this->error_code = 3;
             }
