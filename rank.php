@@ -67,11 +67,6 @@ class Rank
                     }   
                 }
             }
-
-            if ($query == ""){
-                $this->error_code = 0;
-                return $this;
-            }
             
             $this->query = $query;
             return $this;
@@ -182,42 +177,47 @@ class Rank
     }
 
     function getRank()
-    {
+    {   
         $key = $this->apiKey;
         $platform = $this->platform;
         $user = $this->query;
 
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-          CURLOPT_URL => 'https://api.rocketleaguestats.com/v1/player?platform_id=$platform&unique_id=$user',
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => '',
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 30,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => 'GET',
-          CURLOPT_HTTPHEADER => array(
-            'authorization: $key',
-          ),
-        ));
-
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-        curl_close($curl);
-        $temp =  json_decode($response);
-
-        if(isset($temp->code) && ($temp->code == '404')){
-            $this->error_code = 3;
-        }
-
-        $this->response = $temp;
-
-        if ($err) {
-            $this->error($err);
+        if ($user == ""){
+            $this->error_code = 0;
+            return $this;
         } else {
-            // return $response;
-            return $this->_makeResponse($response);
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+              CURLOPT_URL => 'https://api.rocketleaguestats.com/v1/player?platform_id=$platform&unique_id=$user',
+              CURLOPT_RETURNTRANSFER => true,
+              CURLOPT_ENCODING => '',
+              CURLOPT_MAXREDIRS => 10,
+              CURLOPT_TIMEOUT => 30,
+              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+              CURLOPT_CUSTOMREQUEST => 'GET',
+              CURLOPT_HTTPHEADER => array(
+                'authorization: $key',
+              ),
+            ));
+
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
+            curl_close($curl);
+            $temp =  json_decode($response);
+
+            if(isset($temp->code) && ($temp->code == '404')){
+                $this->error_code = 3;
+            }
+
+            $this->response = $temp;
+
+            if ($err) {
+                $this->error($err);
+            } else {
+                // return $response;
+                return $this->_makeResponse($temp);
+            }
         }
     }
 
