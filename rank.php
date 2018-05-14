@@ -115,6 +115,10 @@ class Rank
             case 3:
                 $msg = "\xE2\x9A\xA0 Usernamenya gak ketemu gan.";
                 break;
+
+            case 4:
+                $msg = "\xF4\x80\x81\xBB Wado! Server databasenya down gan!";
+                break;
             
             default:
                 //return the text
@@ -199,8 +203,16 @@ class Rank
             curl_close($curl);
             $temp =  json_decode($response);
 
-            if(isset($temp->code) && ($temp->code == '404')){
-                throw new Exception('3');
+            if(isset($temp->code){
+                switch ($temp->code) {
+
+                    case '404':
+                        throw new Exception('3');
+                        break;
+                    case '500':
+                        throw new Exception('4');
+                        break;
+                }
             }
 
             $this->response = $temp;
