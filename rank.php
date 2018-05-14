@@ -186,10 +186,6 @@ class Rank
             $platform = $this->platform;
             $user = $this->query;
 
-            echo var_dump($key);
-            echo var_dump($platform);
-            echo var_dump($user);
-
             $curl = curl_init();
 
             //set curl option
@@ -210,10 +206,6 @@ class Rank
             curl_close($curl);
             $temp =  json_decode($response);
 
-            echo var_dump($temp);
-            echo var_dump($err);
-            die();
-
             if(isset($temp->code) && ($temp->code == '404')){
                 $this->error_code = 3;
             }
@@ -224,7 +216,7 @@ class Rank
                 $this->error($err);
             } else {
                 // return $response;
-                return $this->_makeResponse();
+                return $this->_makeResponse($temp);
             }
         }
     }
