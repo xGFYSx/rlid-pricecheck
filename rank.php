@@ -67,8 +67,6 @@ class Rank
                     }   
                 }
             }
-            echo var_dump($query);
-            die();
             $this->query = $query;
             return $this;
         }

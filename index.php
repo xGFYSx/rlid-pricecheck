@@ -63,7 +63,7 @@ if( $method )
 		//normal response
 		switch($text) {
 			case '!credit':
-				$text = "All prices courtesy of https://rl.insider.gg\nSpecial thanks to:\n \xE2\x96\xAA Ruffe - Ananta Rizki F. (Mastermind) \n \xE2\x96\xAA xGFYSx - Dewantara Tirta (Programmer)\n \xE2\x96\xAA FRDS  - Agung Firdaus (Tester and Helper)\n \xE2\x96\xAA Yggdrasil128 and colleagues (Devs at RL Insider)\n \xE2\x96\xAA AeonLucid (API dev at RLStats).";
+				$text = "All prices courtesy of https://rl.insider.gg\n Rocket League API provided by https://rocketleaguestats.com\n Special thanks to:\n \xE2\x96\xAA Ruffe - Ananta Rizki F. (Mastermind) \n \xE2\x96\xAA xGFYSx - Dewantara Tirta (Programmer)\n \xE2\x96\xAA FRDS  - Agung Firdaus (Tester and Helper)\n \xE2\x96\xAA Yggdrasil128 and colleagues (Devs at RL Insider)\n \xE2\x96\xAA AeonLucid (API dev at RLStats).";
 				break;
 
 			case '!help':

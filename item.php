@@ -61,15 +61,10 @@ class Item
             foreach ($this->default_platform as $key => $var) {
                 foreach ($var as $varr) {
                     if( preg_match($varr, $query)){
-                        $query = preg_replace($varr, '', $query);
+                        $query = preg_replace(array($varr, '/\s+/'),'', $query);
                         $this->platform = $key;
                     }   
                 }
-            }
-
-            if ($query == ""){
-                $this->error_code = 0;
-                return $this;
             }
             
             $this->query = $query;
@@ -163,33 +158,38 @@ class Item
             'platform' => $this->platform,
             'item' => $this->query
         );
-        
-        $curl = curl_init();
-        
-        //set curl option
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => $this->apiUrl,
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => json_encode($data),
-            CURLOPT_HTTPHEADER => array(
-                "x-api-key: " . $this->apikey
-            ),
-            CURLOPT_RETURNTRANSFER => TRUE
-        ));
-        $response = curl_exec($curl);
-        $err      = curl_error($curl);
-        
-        curl_close($curl);
-        $this->response = json_decode($response);
-        
-        if ($err) {
-            $this->error($err);
+
+        if ($data['item'] == ""){
+            $this->error_code = 0;
+            return $this;
         } else {
-            // return $response;
-            return $this->_makeResponse($response);
+            $curl = curl_init();
+            
+            //set curl option
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => $this->apiUrl,
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 30,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POSTFIELDS => json_encode($data),
+                CURLOPT_HTTPHEADER => array(
+                    "x-api-key: " . $this->apikey
+                ),
+                CURLOPT_RETURNTRANSFER => TRUE
+            ));
+            $response = curl_exec($curl);
+            $err      = curl_error($curl);
+            
+            curl_close($curl);
+            $this->response = json_decode($response);
+            
+            if ($err) {
+                $this->error($err);
+            } else {
+                // return $response;
+                return $this->_makeResponse($response);
+            }
         }
     }
 
