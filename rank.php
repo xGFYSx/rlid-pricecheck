@@ -4,7 +4,7 @@ class Rank
 {
     protected $apiKey = 'Z9VO8OQFV80MKCMBV7VJ23V3WTRO2UYU';
     
-    public $currentSeason = '7';
+    public $currentSeason = '8';
     public $tierList = array("Unranked", "Bronze I", "Bronze II", "Bronze III", "Silver I", "Silver II", "Silver III", "Gold I", "Gold II", "Gold III", "Platinum I", "Platinum II", "Platinum III", "Diamond I", "Diamond II", "Diamond III", "Champion I", "Champion II", "Champion III", "Grand Champion");
     
     public $error = false;
